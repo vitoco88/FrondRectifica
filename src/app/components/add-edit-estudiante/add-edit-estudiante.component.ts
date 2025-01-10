@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 ;
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, Validators, AbstractControl, FormsModule } from '@angular/forms';
@@ -16,12 +16,12 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule, FormsModule],
   templateUrl: './add-edit-estudiante.component.html',
-  styleUrl: './add-edit-estudiante.component.css'
+  styleUrl: './add-edit-estudiante.component.css'  
 })
-export class AddEditEstudianteComponent implements OnInit {
+export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
 
   form: FormGroup;
-  tCodEstudiante: string;
+  tCodEstudiante: string  ='';
   inputvalue: string = '';
 
 
@@ -57,8 +57,8 @@ export class AddEditEstudianteComponent implements OnInit {
       // option1: new FormControl(''),
       option1: [''],
       option: [''],
-      option2: new FormControl,
-      option3: new FormControl(''),
+      option2:  [''],
+      option3: [''],
       tApellidosNombres: '',
       tNroDocumento: '',
       tEmail: '',
@@ -77,11 +77,15 @@ export class AddEditEstudianteComponent implements OnInit {
 
 
   }
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
 
 
   ngOnInit(): void {
 
+  
     // Acceder al estado de la navegación (sin parámetros en la URL)
     const state = history.state;  // Obtiene el 'state' de la navegación
     if (state && state.tCodEstudiante) {
