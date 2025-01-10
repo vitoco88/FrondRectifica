@@ -42,6 +42,7 @@ export class ListEstudiantesComponent implements OnInit {
 
   ngOnInit(): void {
 
+   console.log('hola');
     if (ListEstudiantesComponent.VariableEstatica) {
       this.loading = true;
 
@@ -55,7 +56,8 @@ export class ListEstudiantesComponent implements OnInit {
   }
 
   getListEstudiantes() {
-
+console.log('hola2');
+   
     this.loading = true;
     this._estudianteService.getEstudiantes(this.tNroDocumento).subscribe((data) => {
       this.listEstudiantes = data;
