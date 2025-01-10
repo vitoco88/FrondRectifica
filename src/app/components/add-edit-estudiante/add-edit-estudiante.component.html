@@ -1,0 +1,280 @@
+<div class="row">
+    <div class="col-lg-4 offset-lg-4">
+        <div class="card border-primary mb-3" style="max-width: 45rem; margin: 8px;">
+            <div class="card-header text-center">Datos Estudiante</div>
+            <div class="card-body">
+
+                <form [formGroup]="form" (ngSubmit)="RegistrarEstudiante()">
+
+                    <div class="form-group row" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Apellidos y
+                                Nombres</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input formControlName="tApellidosNombres" type="text" readonly
+                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                class="form-control mt-1" placeholder="Ingrese Nombre"
+                                oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tApellidosNombres')?.hasError('required') && form.get('tApellidosNombres')?.touched">
+                                El Campo es Requerido
+                            </span>
+
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin: 5px;">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Tipo
+                                Documento</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select id="option1" class="form-select"
+                                style="height: 30px; font-size: 12px; width: 150px;" formControlName="option1">
+                                <option *ngFor="let option1 of listaTipoDoc" [value]="option1.tCodigo">{{
+                                    option1.tDetallado}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Nro
+                                Documento</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input #myInputname formControlName="tNroDocumento" type="text" readonly
+                                class="form-control mt-2"
+                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tNroDocumento')?.hasError('required') && form.get('tNroDocumento')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Fecha
+                                Nacimiento</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input formControlName="fNacimiento" type="text" readonly class="form-control mt-2"
+                                style="height: 30px; font-size: 12px;  color: black; font-weight: 500;"
+                                placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('fNacimiento')?.hasError('required') && form.get('fNacimiento')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4">
+                            <label class="col-form-label mt-2"
+                                style="height: 30px; font-size: 12px; text-align: right;">Genero</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" id="tDetSexo" formControlName="tDetSexo" readonly
+                                class="form-control mt-2"
+                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row mb-2" style="margin: 5px;">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Distrito</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select class="form-select" id="option" style="height: 30px; font-size: 12px; width: 150px;"
+                                formControlName="option">
+                                <option *ngFor="let option of listaDistritos" [value]="option.tCodigo">{{
+                                    option.tDetallado}}
+
+                                </option>
+
+                            </select>
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('option')?.hasError('required') && form.get('option')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Direccion</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input #myInputname type="text" formControlName="tDireccion" maxlength="190"
+                                class="form-control mt-2"
+                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tDireccion')?.hasError('required') && form.get('tDireccion')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">telefono</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input formControlName="tTelefono" type="text" class="form-control mt-2"
+                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                placeholder="Ingrese Telefono" oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tTelefono')?.hasError('required') && form.get('tTelefono')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Correo</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input formControlName="tEmail" type="text" class="form-control mt-2"
+                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                placeholder="Ingrese Correo Electronico"
+                                oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tEmail')?.hasError('required') && form.get('tEmail')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2" style="margin: 5px;">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Nivel</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select class="form-select" id="option2"
+                                style="height: 30px; font-size: 12px; width: 150px;" formControlName="option2">
+                                <option *ngFor="let option2 of listaNiveles" [value]="option2.tCodigo">{{
+                                    option2.tDetallado}}
+                                </option>
+                            </select>
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('option2')?.hasError('required') && form.get('option2')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2" style="margin: 5px;">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Grado
+                                Actual</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select class="form-select" id="option3"
+                                style="height: 30px; font-size: 12px; width: 150px;" formControlName="option3">
+                                <option *ngFor="let option3 of listaGrados" [value]="option3.tCodigo">{{
+                                    option3.tDetallado}}
+                                </option>
+                            </select>
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('option3')?.hasError('required') && form.get('option3')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row mb-2" style="margin: 5px;">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Ratificación de
+                                Matricula</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select class="form-select" id="opRatificacion" formControlName="opRatificacion"
+                                (change)="verificarValorRatificacion()"
+                                style="height: 30px; font-size: 12px; width: 150px;">
+                                <option>SI</option>
+                                <option>NO</option>
+                            </select>
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('opRatificacion')?.hasError('required') && form.get('opRatificacion')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group row mb-2" style="margin: 5px; ">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2"
+                                style="height: 30px; font-size: 12px;">Discapacidad</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select class="form-select" id="opDiscapacidad" formControlName="opDiscapacidad"
+                                style="height: 30px; font-size: 12px; width: 150px;"
+                                (change)="verificarValorDiscapacidad()">
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+                            </select>
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('opDiscapacidad')?.hasError('required') && form.get('opDiscapacidad')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Detalle
+                                Discapacidad</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <!--   <input #myInputname type="text" maxlength="190" formControlName="tDiscapacidadObs" class="form-control mt-2"
+                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;" placeholder="Ingrese Detalle"
+                                oninput="this.value = this.value.toUpperCase()">
+                        -->
+
+                            <textarea #myInputname maxlength="190" formControlName="tDiscapacidadObs"
+                                class="form-control mt-2"
+                                style="resize: none;  font-size: 12px; color: black; font-weight: 500; min-height: 70px;"
+                                placeholder="Ingrese Detalle"
+                                (input)="myInputname.value = myInputname.value.toUpperCase()"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2" style="margin: 5px; ">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Exonerado de
+                                Religion</label>
+                        </div>
+                        <div class="col-sm-8 ">
+                            <select class="form-select" id="opExoRe" formControlName="opExoRe"
+                                (change)="verificarValor()" style="height: 30px; font-size: 12px; width: 150px;">
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+
+                            </select>
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('opExoRe')?.hasError('required') && form.get('opExoRe')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mt-2 text-center">
+                        <div class="col-lg-6">
+                            <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Aceptar</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button routerLink="/" routerLinkActive="router-link-active"
+                                routerLinkActive="router-link-active" type="button"
+                                class="btn btn-secondary">Volver</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

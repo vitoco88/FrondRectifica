@@ -1,0 +1,47 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="container">
+    <div class="container mt-5">
+        <div class="d-flex align-items-center">
+            <!-- Input con un margen derecho -->
+            <input [(ngModel)]="tNroDocumento" maxlength="15" type="text" class="form-control custom-width me-3" id="input-field" placeholder="Escribe algo">
+            <!-- Button con un margen izquierdo -->
+            <button   (click)="getListEstudiantes()" class="btn btn-primary" id="submit-btn">Enviar</button>
+        </div>
+    </div>
+    <h5 style="margin-top:  10px; display: flex ; justify-content: space-between;">Listado de Estudiantes</h5>
+    <table *ngIf="listEstudiantes.length>0" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Documento</th>
+                <th scope="col">Apellidos y Nombres</th>
+                <th scope="col">Nivel</th>
+                <th scope="col">Grado Actual</th>
+                <th scope="col">F. Registro</th>
+                <th scope="col">Estado</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listEstudiantes" class="table-active">
+                <td>{{item.tNroDocumento}}</td>
+                <td>{{item.tApellidosNombres}}</td>
+                <td>{{item.tDetNivel}}</td>
+                <td>{{item.tDetGrado}}</td>
+                <td>{{item.fRegistro | date:'dd/MM/yyyy HH:mm'}}</td>
+                <th>{{item.tDetEstadoRegistro}}</th>
+                <td>
+                    <button routerLink="/Edit/{{item.tCodEstudiante}}" type="button" class="btn btn-primary">Editar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h4 *ngIf="listEstudiantes.length == 0">No hay Estudiantes para mostrar</h4>
+</div>
+<style>
+    /* Clase personalizada para el ancho del input */
+    .custom-width {
+        width: 200px;
+        margin: 5px;
+        /* Margen de 5px a la derecha del input */
+    }
+</style>
