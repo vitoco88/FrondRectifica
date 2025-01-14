@@ -2,11 +2,21 @@
 <div *ngIf="!loading" class="container">
     <div class="container mt-5">
         <div class="d-flex align-items-center">
+            <select class="form-control me-3" 
+             id="opBusqueda" [(ngModel)]="selectedValue1" 
+            (change)="onSelectChangeBusqueda($event)" 
+                style="font-size: 13px; width: 150px; color: black; font-weight: 600;" >
+                <option value="01">Doc. Apoderado</option>
+                <option value="02">Doc. Estudiante</option>
+            </select>
             <!-- Input con un margen derecho -->
-            <input [(ngModel)]="tNroDocumento" maxlength="15" type="text" class="form-control custom-width me-3" id="input-field" placeholder="Escribe algo">
+            <input [(ngModel)]="tNroDocumento" (keydown.enter)="onEnter()" maxlength="15" type="text" class="form-control custom-width me-3"
+                     #myInput placeholder="Escribe algo" style="color: black; font-weight: 600;">
             <!-- Button con un margen izquierdo -->
-            <button   (click)="getListEstudiantes()" class="btn btn-primary" style="margin: 3px;" id="submit-btn">Enviar</button>
-            <button  routerLink="/Matricula/"  class="btn btn-secondary" id="submit-btn2" style="margin: 3px;">Nueva Matricula</button>
+            <button (click)="getListEstudiantes()" class="btn btn-primary" style="margin: 3px;"
+                id="submit-btn">Enviar</button>
+            <button routerLink="/Matricula/" class="btn btn-secondary" id="submit-btn2" style="margin: 3px;">Nueva
+                Matricula</button>
         </div>
     </div>
     <h5 style="margin-top:  10px; display: flex ; justify-content: space-between;">Listado de Estudiantes</h5>
@@ -28,10 +38,11 @@
                 <td>{{item.tApellidosNombres}}</td>
                 <td>{{item.tDetNivel}}</td>
                 <td>{{item.tDetGrado}}</td>
-                <td>{{item.fRegistro | date:'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{item.fRegistro | date:'dd/MM/yyyy HH:mm':'UTC'}}</td>
                 <th>{{item.tDetEstadoRegistro}}</th>
                 <td>
-                    <button routerLink="/Edit/{{item.tCodEstudiante}}" type="button" class="btn btn-primary">Editar</button>
+                    <button routerLink="/Edit/{{item.tCodEstudiante}}" type="button"
+                        class="btn btn-primary">Editar</button>
                 </td>
             </tr>
         </tbody>

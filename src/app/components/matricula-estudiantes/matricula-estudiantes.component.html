@@ -1,4 +1,5 @@
-<div class="container">
+
+<div  class="container">
     <div class="row">
         <!-- Columna izquierda con un solo card -->
         <div class="col-12 col-md-6">
@@ -6,7 +7,7 @@
                 <div class="card-header">ESTUDIANTE</div>
                 <div class="card-body">
 
-                    <form [formGroup]="form">
+                    <form [formGroup]="form" (ngSubmit)="MatricularEstudiante()">
 
                         <div class="form-group row" style="margin: 5px; text-align: end;">
                             <div class="col-sm-4 Text-end">
@@ -14,9 +15,9 @@
                                     Paterno</label>
                             </div>
                             <div class="col-sm-8">
-                                <input formControlName="tAPaterno" type="text" readonly
+                                <input #myInput formControlName="tAPaterno" maxlength="50" (input)="onInputChange($event)" type="text"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
-                                    class="form-control mt-1" placeholder="Ingrese Nombre"
+                                    class="form-control mt-1" placeholder="Ingrese Apellido Paterno" maxlength="30"
                                     oninput="this.value = this.value.toUpperCase()">
                                 <span style="font-size: 11px;"
                                     *ngIf="form.get('tAPaterno')?.hasError('required') && form.get('tAPaterno')?.touched">
@@ -30,9 +31,9 @@
                                     Materno</label>
                             </div>
                             <div class="col-sm-8">
-                                <input formControlName="tAMaterno" type="text" readonly
+                                <input formControlName="tAMaterno" maxlength="50" type="text"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
-                                    class="form-control mt-1" placeholder="Ingrese Nombre"
+                                    class="form-control mt-1" placeholder="Ingrese Apellido Materno"
                                     oninput="this.value = this.value.toUpperCase()">
                                 <span style="font-size: 11px;"
                                     *ngIf="form.get('tAMaterno')?.hasError('required') && form.get('tAMaterno')?.touched">
@@ -46,7 +47,7 @@
                                     Nombres</label>
                             </div>
                             <div class="col-sm-8">
-                                <input formControlName="tNombres" type="text" readonly
+                                <input formControlName="tNombres" type="text" maxlength="50"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
                                     class="form-control mt-1" placeholder="Ingrese Nombre"
                                     oninput="this.value = this.value.toUpperCase()">
@@ -64,6 +65,7 @@
                             <div class="col-sm-8">
                                 <select id="option1" class="form-select"
                                     style="height: 30px; font-size: 12px; width: 150px;" formControlName="option1">
+                                    <option value="" disabled selected>Seleccionar</option>
                                     <option *ngFor="let option1 of listaTipoDoc" [value]="option1.tCodigo">{{
                                         option1.tDetallado}}
                                     </option>
@@ -78,34 +80,36 @@
                             </div>
                             <div class="col-sm-8">
                                 <div class="row" style="margin-left: 1px;">
-                                    <input #myInputname formControlName="tNroDocumento" type="text" readonly
-                                        class="form-control mt-2"
+                                    <input #myInputname id="tNroDocumento" formControlName="tNroDocumento" type="text"
+                                        class="form-control mt-2" maxlength="13"
                                         style="height: 30px; width: 150px; font-size: 12px; color: black; font-weight: 500;"
-                                        placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
-                                    <button type="button" (click)="openModal()" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#mod"
+                                        placeholder="Ingrese Documento" oninput="this.value = this.value.toUpperCase()">
+                                    <button type="button" (click)="getValidadDocuEstudiante()"
+                                        class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#mod"
                                         style="margin-left: 2px; height: 30px">Verificar</button>
-                                     
-                                        <div class="modal" id="MyModal">
-                                            <div class="modal-dialog" role="document">
-                                              <div class="modal-content">
+
+                                    <div class="modal" id="MyModal">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
                                                 <div class="modal-header" style="height: 40px;">
-                                                  <h6 class="modal-title" style="margin: 4px;">Información</h6>
-                                               <!--   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <h6 class="modal-title" style="margin: 4px;">Información</h6>
+                                                    <!--   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true"></span>
                                                   </button>  -->
                                                 </div>
                                                 <div class="modal-body">
-                                                  <p>Modal body text goes here.</p>
+                                                    <label>{{ txtExisteObs }}</label>
                                                 </div>
                                                 <div class="modal-footer">
-                                              <!--    <button type="button" style="height: 35px;" class="btn btn-primary">Save changes</button>
-                                                -->  <button type="button" (click)="closeModal()"  style="height: 35px;" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <!--    <button type="button" style="height: 35px;" class="btn btn-primary">Save changes</button>
+                                                --> <button type="button" (click)="closeModal()" style="height: 35px;"
+                                                        class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                 </div>
-                                              </div>
                                             </div>
-                                          </div>
-                                          
-                                          
+                                        </div>
+                                    </div>
+
+
 
 
 
@@ -134,7 +138,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <input formControlName="fNacimiento" type="date" class="form-control mt-2"
-                                    style="height: 30px; font-size: 12px;  color: black; font-weight: 500;"
+                                    style="height: 30px; width: 160px; font-size: 12px;  color: black; font-weight: 500;"
                                     placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
                                 <span style="font-size: 11px;"
                                     *ngIf="form.get('fNacimiento')?.hasError('required') && form.get('fNacimiento')?.touched">
@@ -143,17 +147,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
-                            <div class="col-sm-4">
+                        <div class="form-group row mb-2" style="margin: 5px;">
+                            <div class="col-sm-4 Text-end" style="text-align: end;">
                                 <label class="col-form-label mt-2"
                                     style="height: 30px; font-size: 12px; text-align: right;">Genero</label>
                             </div>
-                            <div class="col-sm-8">
-                                <input type="text" id="tDetSexo" formControlName="tDetSexo" readonly
-                                    class="form-control mt-2"
-                                    style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
-                                    placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
-
+                            <div class="col-sm-8">                               
+                                    <select class="form-select" id="opSexo" formControlName="opSexo"
+                                    style="height: 30px; width: 150px; font-size: 12px; ">
+                                    <option value="M">MASCULINO</option>
+                                    <option value="F">FEMENINO</option>
+                                </select>
                             </div>
                         </div>
 
@@ -166,6 +170,7 @@
                             <div class="col-sm-8">
                                 <select class="form-select" id="option"
                                     style="height: 30px; font-size: 12px; width: 150px;" formControlName="option">
+                                    <option value="" disabled selected>Seleccionar</option>
                                     <option *ngFor="let option of listaDistritos" [value]="option.tCodigo">{{
                                         option.tDetallado}}
 
@@ -184,10 +189,10 @@
                                     style="height: 30px; font-size: 12px; ">Direccion</label>
                             </div>
                             <div class="col-sm-8">
-                                <input #myInputname type="text" formControlName="tDireccion" maxlength="190"
+                                <input #myInputname type="text" maxlength="200" formControlName="tDireccion" maxlength="190"
                                     class="form-control mt-2"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
-                                    placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
+                                    placeholder="Ingrese Dirección" oninput="this.value = this.value.toUpperCase()">
                                 <span style="font-size: 11px;"
                                     *ngIf="form.get('tDireccion')?.hasError('required') && form.get('tDireccion')?.touched">
                                     El Campo es Requerido
@@ -200,7 +205,7 @@
                                     style="height: 30px; font-size: 12px;">telefono</label>
                             </div>
                             <div class="col-sm-8">
-                                <input formControlName="tTelefono" type="text" class="form-control mt-2"
+                                <input formControlName="tTelefono" type="text" maxlength="15" class="form-control mt-2"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
                                     placeholder="Ingrese Telefono" oninput="this.value = this.value.toUpperCase()">
                                 <span style="font-size: 11px;"
@@ -214,7 +219,7 @@
                                 <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Correo</label>
                             </div>
                             <div class="col-sm-8">
-                                <input formControlName="tEmail" type="text" class="form-control mt-2"
+                                <input formControlName="tEmail" maxlength="90" type="text" class="form-control mt-2"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
                                     placeholder="Ingrese Correo Electronico"
                                     oninput="this.value = this.value.toUpperCase()">
@@ -232,6 +237,7 @@
                             <div class="col-sm-8">
                                 <select class="form-select" id="option2"
                                     style="height: 30px; font-size: 12px; width: 150px;" formControlName="option2">
+                                    <option value="" disabled selected>Seleccionar</option>
                                     <option *ngFor="let option2 of listaNiveles" [value]="option2.tCodigo">{{
                                         option2.tDetallado}}
                                     </option>
@@ -250,6 +256,7 @@
                             <div class="col-sm-8">
                                 <select class="form-select" id="option3"
                                     style="height: 30px; font-size: 12px; width: 150px;" formControlName="option3">
+                                    <option value="" disabled selected>Seleccionar</option>
                                     <option *ngFor="let option3 of listaGrados" [value]="option3.tCodigo">{{
                                         option3.tDetallado}}
                                     </option>
@@ -262,7 +269,7 @@
                         </div>
 
 
-                        <div class="form-group row mb-2" style="margin: 5px;">
+               <!--   RATIFIACION      <div class="form-group row mb-2" style="margin: 5px;">
                             <div class="col-sm-4 Text-end" style="text-align: end;">
                                 <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Ratificación
                                     de
@@ -280,7 +287,7 @@
                                 </span>
                             </div>
                         </div>
-
+                    -->
 
 
 
@@ -343,12 +350,12 @@
                                     Seguro</label>
                             </div>
                             <div class="col-sm-8">
-                                <select class="form-select" id="opRatificacion" formControlName="opSeguro"
+                                <select class="form-select" id="opSeguro" formControlName="opSeguro"
                                     style="height: 30px; font-size: 12px; width: 150px;">
-                                    <option>SIS</option>
-                                    <option>ESSALUD</option>
-                                    <option>EPS</option>
-                                    <option>OTRO</option>
+                                    <option value="02">SIS</option>
+                                    <option value="01">ESSALUD</option>
+                                    <option value="03">EPS</option>
+                                    <option value="04">OTRO</option>
                                 </select>
                                 <span style="font-size: 11px;"
                                     *ngIf="form.get('opRatificacion')?.hasError('required') && form.get('opRatificacion')?.touched">
@@ -365,11 +372,11 @@
                             <div class="col-sm-8">
                                 <select class="form-select" id="opConvive" formControlName="opConvive"
                                     style="height: 30px; font-size: 12px; width: 150px;">
-                                    <option>PADRE</option>
-                                    <option>MADRE</option>
-                                    <option>AMBOS</option>
-                                    <option>SOLO</option>
-                                    <option>APODERADO</option>
+                                    <option value="01">PADRE</option>
+                                    <option value="02">MADRE</option>
+                                    <option value="03">AMBOS</option>
+                                    <option value="04">SOLO</option>
+                                    <option value="05">APODERADO</option>
                                 </select>
                                 <span style="font-size: 11px;"
                                     *ngIf="form.get('opRatificacion')?.hasError('required') && form.get('opRatificacion')?.touched">
@@ -386,14 +393,14 @@
                             <div class="col-sm-8">
                                 <select class="form-select" id="opPCargo" formControlName="opPCargo"
                                     style="height: 30px; font-size: 12px; width: 150px;">
-                                    <option>PADRE</option>
-                                    <option>MADRE</option>
-                                    <option>AMBOS</option>
-                                    <option>SOLO</option>
-                                    <option>APODERADO</option>
+                                    <option value="01">PADRE</option>
+                                    <option value="02">MADRE</option>
+                                    <option value="03">AMBOS</option>
+                                    <option value="04">SOLO</option>
+                                    
                                 </select>
                                 <span style="font-size: 11px;"
-                                    *ngIf="form.get('opRatificacion')?.hasError('required') && form.get('opRatificacion')?.touched">
+                                    *ngIf="form.get('opPCargo')?.hasError('required') && form.get('opPCargo')?.touched">
                                     El Campo es Requerido
                                 </span>
                             </div>
@@ -412,8 +419,11 @@
                                         <option [value]="true">SI</option>
                                         <option [value]="false">NO</option>
                                     </select>
-                                    <input *ngIf="operation" formControlName="tNroHermanos" type="text"
-                                        style="height: 30px; font-size: 12px; width: 90px; color: black; font-weight: 500; margin-left: 2px;"
+
+                                    <label *ngIf="operation" class="col-form-label mt-1"
+                                        style="height: 30px; font-size: 12px; margin-left: 8px; ">Cuantos:</label>
+                                    <input *ngIf="operation" formControlName="nCantHermanos" type="number"
+                                        style="height: 30px; font-size: 12px; width: 90px; color: black; font-weight: 500; margin-left: 5px;"
                                         class="form-control mt-1">
                                     <span style="font-size: 11px;"
                                         *ngIf="form.get('opRatificacion')?.hasError('required') && form.get('opRatificacion')?.touched">
@@ -422,6 +432,28 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group text-center"  style=" align-items: center; ">
+                            <div class="row" style="align-items: center; align-content: center; align-self: center;  ">
+                                <div class="col-lg-4">
+
+                                </div>
+                                <div class="col-lg-2">
+                                    <button type="submit" [disabled]="form.invalid"
+                                        class="btn btn-primary">Aceptar</button>
+                                </div>
+                                <div class="col-lg-2">
+                                    <button routerLink="/" routerLinkActive="router-link-active"
+                                        routerLinkActive="router-link-active" type="button"
+                                        class="btn btn-secondary">Volver</button>
+                                </div>
+                                <div class="col-lg-4">
+
+                                </div>
+                            </div>
+                        </div>
+
+
                     </form>
                 </div>
             </div>
@@ -433,14 +465,13 @@
                 <div class="card-header">PADRE</div>
                 <div class="card-body">
                     <form [formGroup]="formP">
-
                         <div class="form-group row" style="margin: 5px; text-align: end;">
                             <div class="col-sm-4 Text-end">
                                 <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Ap.
                                     Paterno</label>
                             </div>
                             <div class="col-sm-8">
-                                <input formControlName="tAPaternoPadre" type="text"
+                                <input formControlName="tAPaternoPadre" maxlength="50" type="text" maxlength="50"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
                                     class="form-control mt-1" placeholder="Ingrese Paterno"
                                     oninput="this.value = this.value.toUpperCase()">
@@ -456,7 +487,7 @@
                                     Materno</label>
                             </div>
                             <div class="col-sm-8">
-                                <input formControlName="tAMaternoPadre" type="text" readonly
+                                <input formControlName="tAMaternoPadre" maxlength="50" type="text"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
                                     class="form-control mt-1" placeholder="Ingrese Apellido Paterno"
                                     oninput="this.value = this.value.toUpperCase()">
@@ -472,7 +503,7 @@
                                     style="height: 30px; font-size: 12px;">Nombres</label>
                             </div>
                             <div class="col-sm-8">
-                                <input formControlName="tNombresPadre" type="text"
+                                <input formControlName="tNombresPadre" maxlength="50" type="text"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
                                     class="form-control mt-1" placeholder="Ingrese Nombre"
                                     oninput="this.value = this.value.toUpperCase()">
@@ -490,6 +521,7 @@
                             <div class="col-sm-8">
                                 <select id="option1Padre" class="form-select"
                                     style="height: 30px; font-size: 12px; width: 150px;" formControlName="option1Padre">
+                                    <option value="" disabled selected>Seleccionar</option>
                                     <option *ngFor="let option1 of listaTipoDoc" [value]="option1.tCodigo">{{
                                         option1.tDetallado}}
                                     </option>
@@ -505,11 +537,10 @@
                             <div class="col-sm-8">
                                 <div class="row" style="margin-left: 1px;">
                                     <input #myInputname formControlName="tNroDocumentoPadre" type="text"
-                                        class="form-control mt-2"
+                                        class="form-control mt-2" maxlength="13"
                                         style="height: 30px; width: 150px; font-size: 12px; color: black; font-weight: 500;"
                                         placeholder="Ingrese Documento" oninput="this.value = this.value.toUpperCase()">
-                                    <button type="button" class="btn btn-primary mt-2"
-                                        style="margin-left: 2px; height: 30px">Verificar</button>
+                                   
                                     <span style="font-size: 11px;"
                                         *ngIf="form.get('tNroDocumentoPadre')?.hasError('required') && form.get('tNroDocumentoPadre')?.touched">
                                         El Campo es Requerido
@@ -524,8 +555,9 @@
                                     Nacimiento</label>
                             </div>
                             <div class="col-sm-8">
-                                <input formControlName="fNacimientoPadre" type="text" class="form-control mt-2"
-                                    style="height: 30px; font-size: 12px;  color: black; font-weight: 500;"
+                                <input formControlName="fNacimientoPadre" type="date" min="1900-01-01"
+                                    class="form-control mt-2"
+                                    style="height: 30px; font-size: 12px; width: 160px; color: black; font-weight: 500;"
                                     placeholder="Ingrese F. Nacimiento" oninput="this.value = this.value.toUpperCase()">
                                 <span style="font-size: 11px;"
                                     *ngIf="form.get('fNacimientoPadre')?.hasError('required') && form.get('fNacimientoPadre')?.touched">
@@ -544,7 +576,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <input #myInputname type="text" formControlName="tDireccionPadre" maxlength="190"
-                                    class="form-control mt-2"
+                                    class="form-control mt-2" maxlength="200"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
                                     placeholder="Ingrese Direccion" oninput="this.value = this.value.toUpperCase()">
                                 <span style="font-size: 11px;"
@@ -559,7 +591,7 @@
                                     style="height: 30px; font-size: 12px;">telefono</label>
                             </div>
                             <div class="col-sm-8">
-                                <input formControlName="tTelefonoPadre" type="text" class="form-control mt-2"
+                                <input formControlName="tTelefonoPadre" type="text" maxlength="15" class="form-control mt-2"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
                                     placeholder="Ingrese Telefono" oninput="this.value = this.value.toUpperCase()">
                                 <span style="font-size: 11px;"
@@ -573,7 +605,7 @@
                                 <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Correo</label>
                             </div>
                             <div class="col-sm-8">
-                                <input formControlName="tEmailPadre" type="text" class="form-control mt-2"
+                                <input formControlName="tEmailPadre" maxlength="90" type="text" class="form-control mt-2"
                                     style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
                                     placeholder="Ingrese Correo Electronico"
                                     oninput="this.value = this.value.toUpperCase()">
@@ -591,9 +623,158 @@
             <div class="card border-secondary mb-3">
                 <div class="card-header">MADRE</div>
                 <div class="card-body">
-                    <h4 class="card-title">Secondary card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+                    <form [formGroup]="formMadre">
+
+                        <div class="form-group row" style="margin: 5px; text-align: end;">
+                            <div class="col-sm-4 Text-end">
+                                <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Ap.
+                                    Paterno</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input formControlName="tAPaternoMadre" maxlength="50" type="text" maxlength="30"
+                                    style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                    class="form-control mt-1" placeholder="Ingrese Ap. Paterno"
+                                    oninput="this.value = this.value.toUpperCase()">
+                                <span style="font-size: 11px;"
+                                    *ngIf="form.get('tAPaternoMadre')?.hasError('required') && form.get('tAPaternoMadre')?.touched">
+                                    El Campo es Requerido
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="margin: 5px; text-align: end;">
+                            <div class="col-sm-4 Text-end">
+                                <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Apellido
+                                    Materno</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input formControlName="tAMaternoMadre" maxlength="50" type="text"
+                                    style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                    class="form-control mt-1" placeholder="Ingrese Ap. Materno"
+                                    oninput="this.value = this.value.toUpperCase()">
+                                <span style="font-size: 11px;"
+                                    *ngIf="form.get('tAMaternoMadre')?.hasError('required') && form.get('tAMaternoMadre')?.touched">
+                                    El Campo es Requerido
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="margin: 5px; text-align: end;">
+                            <div class="col-sm-4 Text-end">
+                                <label class="col-form-label mt-2"
+                                    style="height: 30px; font-size: 12px;">Nombres</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input formControlName="tNombresMadre" maxlength="50" type="text"
+                                    style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                    class="form-control mt-1" placeholder="Ingrese Nombre"
+                                    oninput="this.value = this.value.toUpperCase()">
+                                <span style="font-size: 11px;"
+                                    *ngIf="form.get('tNombresMadre')?.hasError('required') && form.get('tNombresMadre')?.touched">
+                                    El Campo es Requerido
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="margin: 5px;">
+                            <div class="col-sm-4 Text-end" style="text-align: end;">
+                                <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Tipo
+                                    Documento</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select id="option1Madre" class="form-select"
+                                    style="height: 30px; font-size: 12px; width: 150px;" formControlName="option1Madre">
+                                    <option value="" disabled selected>Seleccionar</option>
+                                    <option *ngFor="let option1 of listaTipoDoc" [value]="option1.tCodigo">{{
+                                        option1.tDetallado}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" style="margin: 5px; text-align: end;">
+                            <div class="col-sm-4 Text-end">
+                                <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Nro
+                                    Documento</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="row" style="margin-left: 1px;">
+                                    <input #myInputname formControlName="tNroDocumentoMadre" type="text"
+                                        class="form-control mt-2" maxlength="13"
+                                        style="height: 30px; width: 150px; font-size: 12px; color: black; font-weight: 500;"
+                                        placeholder="Ingrese Documento" oninput="this.value = this.value.toUpperCase()">
+                                  
+                                    <span style="font-size: 11px;"
+                                        *ngIf="form.get('tNroDocumentoMadre')?.hasError('required') && form.get('tNroDocumentoMadre')?.touched">
+                                        El Campo es Requerido
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="margin: 5px; text-align: end;">
+                            <div class="col-sm-4 Text-end">
+                                <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Fecha
+                                    Nacimiento</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input formControlName="fNacimientoMadre" type="date" min="1900-01-01"
+                                    class="form-control mt-2"
+                                    style="height: 30px; width: 160px; font-size: 12px;  color: black; font-weight: 500;"
+                                    placeholder="Ingrese F. Nacimiento" oninput="this.value = this.value.toUpperCase()">
+                                <span style="font-size: 11px;"
+                                    *ngIf="form.get('fNacimientoMadre')?.hasError('required') && form.get('fNacimientoMadre')?.touched">
+                                    El Campo es Requerido
+                                </span>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
+                            <div class="col-sm-4 Text-end">
+                                <label class="col-form-label mt-2"
+                                    style="height: 30px; font-size: 12px; ">Direccion</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input #myInputname type="text" maxlength="200" formControlName="tDireccionMadre" maxlength="190"
+                                    class="form-control mt-2"
+                                    style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                    placeholder="Ingrese Direccion" oninput="this.value = this.value.toUpperCase()">
+                                <span style="font-size: 11px;"
+                                    *ngIf="form.get('tDireccionMadre')?.hasError('required') && form.get('tDireccionMadre')?.touched">
+                                    El Campo es Requerido
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
+                            <div class="col-sm-4 Text-end">
+                                <label class="col-form-label mt-2"
+                                    style="height: 30px; font-size: 12px;">telefono</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input formControlName="tTelefonoMadre" maxlength="15" type="txt" class="form-control mt-2"
+                                    style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                    placeholder="Ingrese Telefono" oninput="this.value = this.value.toUpperCase()">
+                                <span style="font-size: 11px;"
+                                    *ngIf="form.get('tTelefonoMadre')?.hasError('required') && form.get('tTelefonoMadre')?.touched">
+                                    El Campo es Requerido
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
+                            <div class="col-sm-4 Text-end">
+                                <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Correo</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input formControlName="tEmailMadre" type="text" maxlength="90" class="form-control mt-2"
+                                    style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                    placeholder="Ingrese Correo Electronico"
+                                    oninput="this.value = this.value.toUpperCase()">
+                                <span style="font-size: 11px;"
+                                    *ngIf="form.get('tEmailMadre')?.hasError('required') && form.get('tEmailMadre')?.touched">
+                                    El Campo es Requerido
+                                </span>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

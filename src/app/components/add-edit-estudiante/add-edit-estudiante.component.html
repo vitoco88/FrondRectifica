@@ -1,19 +1,20 @@
-<div class="row">
+<app-progress-bar *ngIf="loading"></app-progress-bar> 
+<div  *ngIf="!loading"  class="row">
     <div class="col-lg-4 offset-lg-4">
-        <div class="card border-primary mb-3" style="max-width: 45rem; margin: 8px;">
+        <div class="card border-primary mb-3" style="max-width: 70rem; width: 55; margin: 8px;">
             <div class="card-header text-center">Datos Estudiante</div>
             <div class="card-body">
 
                 <form [formGroup]="form" (ngSubmit)="RegistrarEstudiante()">
 
-                    <div class="form-group row" style="margin: 5px; text-align: end;">
+               <!--    <div class="form-group row" style="margin: 5px; text-align: end;">
                         <div class="col-sm-4 Text-end">
-                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Apellidos y
+                            <label class="col-form-label mt-2" style="height: 30px; ">Apellidos y
                                 Nombres</label>
                         </div>
                         <div class="col-sm-8">
                             <input formControlName="tApellidosNombres" type="text" readonly
-                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                style="height: 30px;  color: black; font-weight: 505;"
                                 class="form-control mt-1" placeholder="Ingrese Nombre"
                                 oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
@@ -23,15 +24,79 @@
 
                         </div>
                     </div>
+                -->
+                  
+                <div class="form-group row" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Apellidos Paterno</label>
+                        </div>
+                        <div  class="col-sm-8">
+                            <input  formControlName="tAPaternoEstudiante" type="text"  
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                class="form-control mt-1" placeholder="Ingrese Nombre"
+                                oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tAPaternoEstudiante')?.hasError('required') && form.get('tAPaternoEstudiante')?.touched">
+                                El Campo es Requerido
+                            </span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px;  font-size: 12px;">Apellidos Materno</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input formControlName="tAMaternoEstudiante" type="text"  
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                class="form-control mt-1" placeholder="Ingrese Nombre"
+                                oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tAMaternoEstudiante')?.hasError('required') && form.get('tAMaternoEstudiante')?.touched">
+                                El Campo es Requerido
+                            </span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Nombres</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input formControlName="tNombresEstudiante" type="text"  
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                class="form-control mt-1" placeholder="Ingrese Nombre"
+                                oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tNombresEstudiante')?.hasError('required') && form.get('tNombresEstudiante')?.touched">
+                                El Campo es Requerido
+                            </span>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
                     <div class="form-group row" style="margin: 5px;">
                         <div class="col-sm-4 Text-end" style="text-align: end;">
-                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Tipo
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Tipo
                                 Documento</label>
                         </div>
                         <div class="col-sm-8">
-                            <select id="option1" class="form-select"
-                                style="height: 30px; font-size: 12px; width: 150px;" formControlName="option1">
-                                <option *ngFor="let option1 of listaTipoDoc" [value]="option1.tCodigo">{{
+                            <select id="option1" class="form-select"  
+                                style="height: 30px;  width: 150px; font-weight: 505; font-size: 12px;" formControlName="option1">
+                                <option style="font-weight: 505;" *ngFor="let option1 of listaTipoDoc" [value]="option1.tCodigo">{{
                                     option1.tDetallado}}
                                 </option>
                             </select>
@@ -46,7 +111,7 @@
                         <div class="col-sm-8">
                             <input #myInputname formControlName="tNroDocumento" type="text" readonly
                                 class="form-control mt-2"
-                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
                                 placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
                                 *ngIf="form.get('tNroDocumento')?.hasError('required') && form.get('tNroDocumento')?.touched">
@@ -61,8 +126,8 @@
                                 Nacimiento</label>
                         </div>
                         <div class="col-sm-8">
-                            <input formControlName="fNacimiento" type="text" readonly class="form-control mt-2"
-                                style="height: 30px; font-size: 12px;  color: black; font-weight: 500;"
+                            <input formControlName="fNacimiento" type="date" class="form-control mt-2"
+                                style="height: 30px;   color: black; font-weight: 505; font-size: 12px;"
                                 placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
                                 *ngIf="form.get('fNacimiento')?.hasError('required') && form.get('fNacimiento')?.touched">
@@ -74,12 +139,12 @@
                     <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
                         <div class="col-sm-4">
                             <label class="col-form-label mt-2"
-                                style="height: 30px; font-size: 12px; text-align: right;">Genero</label>
+                                style="height: 30px;  text-align: right; font-size: 12px;">Genero</label>
                         </div>
                         <div class="col-sm-8">
                             <input type="text" id="tDetSexo" formControlName="tDetSexo" readonly
                                 class="form-control mt-2"
-                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
                                 placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
 
                         </div>
@@ -91,8 +156,9 @@
                             <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Distrito</label>
                         </div>
                         <div class="col-sm-8">
-                            <select class="form-select" id="option" style="height: 30px; font-size: 12px; width: 150px;"
+                            <select class="form-select" id="option" style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;"
                                 formControlName="option">
+                                <option value="" disabled selected>Seleccionar</option>
                                 <option *ngFor="let option of listaDistritos" [value]="option.tCodigo">{{
                                     option.tDetallado}}
 
@@ -110,9 +176,9 @@
                             <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Direccion</label>
                         </div>
                         <div class="col-sm-8">
-                            <input #myInputname type="text" formControlName="tDireccion" maxlength="190"
-                                class="form-control mt-2"
-                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                            <input #myInputname type="text" formControlName="tDireccion" [readonly]="isReadonly"
+                                maxlength="190" class="form-control mt-2"
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
                                 placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
                                 *ngIf="form.get('tDireccion')?.hasError('required') && form.get('tDireccion')?.touched">
@@ -122,11 +188,12 @@
                     </div>
                     <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
                         <div class="col-sm-4 Text-end">
-                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">telefono</label>
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Telefono/Celular</label>
                         </div>
                         <div class="col-sm-8">
-                            <input formControlName="tTelefono" type="text" class="form-control mt-2"
-                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                            <input formControlName="tTelefono" type="text" maxlength="28" class="form-control mt-2"
+                                [readonly]="isReadonly"
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
                                 placeholder="Ingrese Telefono" oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
                                 *ngIf="form.get('tTelefono')?.hasError('required') && form.get('tTelefono')?.touched">
@@ -140,7 +207,8 @@
                         </div>
                         <div class="col-sm-8">
                             <input formControlName="tEmail" type="text" class="form-control mt-2"
-                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;"
+                                [readonly]="isReadonly"
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
                                 placeholder="Ingrese Correo Electronico"
                                 oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
@@ -156,7 +224,8 @@
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" id="option2"
-                                style="height: 30px; font-size: 12px; width: 150px;" formControlName="option2">
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;" formControlName="option2">
+                                <option value="" disabled selected>Seleccionar</option>
                                 <option *ngFor="let option2 of listaNiveles" [value]="option2.tCodigo">{{
                                     option2.tDetallado}}
                                 </option>
@@ -174,7 +243,8 @@
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" id="option3"
-                                style="height: 30px; font-size: 12px; width: 150px;" formControlName="option3">
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;" formControlName="option3">
+                                <option value="" disabled selected>Seleccionar</option>
                                 <option *ngFor="let option3 of listaGrados" [value]="option3.tCodigo">{{
                                     option3.tDetallado}}
                                 </option>
@@ -189,13 +259,14 @@
 
                     <div class="form-group row mb-2" style="margin: 5px;">
                         <div class="col-sm-4 Text-end" style="text-align: end;">
-                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Ratificación de
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; font-weight: 505;">Ratificación de
                                 Matricula</label>
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" id="opRatificacion" formControlName="opRatificacion"
                                 (change)="verificarValorRatificacion()"
-                                style="height: 30px; font-size: 12px; width: 150px;">
+                                style="height: 30px;  width: 150px; font-size: 12px;">
+                                <option value="" disabled selected>Seleccionar</option>
                                 <option>SI</option>
                                 <option>NO</option>
                             </select>
@@ -212,12 +283,13 @@
                     <div class="form-group row mb-2" style="margin: 5px; ">
                         <div class="col-sm-4 Text-end" style="text-align: end;">
                             <label class="col-form-label mt-2"
-                                style="height: 30px; font-size: 12px;">Discapacidad</label>
+                                style="height: 30px; font-size: 12px; ">Discapacidad</label>
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" id="opDiscapacidad" formControlName="opDiscapacidad"
-                                style="height: 30px; font-size: 12px; width: 150px;"
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;"
                                 (change)="verificarValorDiscapacidad()">
+                                <option value="" disabled selected>Seleccionar</option>
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
                             </select>
@@ -229,30 +301,30 @@
                     </div>
                     <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
                         <div class="col-sm-4 Text-end">
-                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Detalle
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Detalle
                                 Discapacidad</label>
                         </div>
                         <div class="col-sm-8">
                             <!--   <input #myInputname type="text" maxlength="190" formControlName="tDiscapacidadObs" class="form-control mt-2"
-                                style="height: 30px; font-size: 12px; color: black; font-weight: 500;" placeholder="Ingrese Detalle"
+                                style="height: 30px;  color: black; font-weight: 505;" placeholder="Ingrese Detalle"
                                 oninput="this.value = this.value.toUpperCase()">
                         -->
 
                             <textarea #myInputname maxlength="190" formControlName="tDiscapacidadObs"
-                                class="form-control mt-2"
-                                style="resize: none;  font-size: 12px; color: black; font-weight: 500; min-height: 70px;"
+                                class="form-control mt-2" [readonly]="isReadonly"
+                                style="resize: none;   color: black; font-weight: 505; min-height: 70px; font-size: 12px;"
                                 placeholder="Ingrese Detalle"
                                 (input)="myInputname.value = myInputname.value.toUpperCase()"></textarea>
                         </div>
                     </div>
-                    <div class="form-group row mb-2" style="margin: 5px; ">
+                    <!--             <div class="form-group row mb-2" style="margin: 5px; ">
                         <div class="col-sm-4 Text-end" style="text-align: end;">
-                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Exonerado de
+                            <label class="col-form-label mt-2" style="height: 30px; ">Exonerado de
                                 Religion</label>
                         </div>
                         <div class="col-sm-8 ">
-                            <select class="form-select" id="opExoRe" formControlName="opExoRe"
-                                (change)="verificarValor()" style="height: 30px; font-size: 12px; width: 150px;">
+                            <select class="form-select" id="opExoRe" formControlName="opExoRe" 
+                                (change)="verificarValor()" style="height: 30px;  width: 150px;">
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
 
@@ -263,9 +335,287 @@
                             </span>
                         </div>
                     </div>
+                -->
+                    <div class="form-group row mb-2" style="margin: 5px; ">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Exonerado de
+                                Religion</label>
+                        </div>
+                        <div class="col-sm-8 ">
+                            <select class="form-select" id="opExoRe" formControlName="opExoRe"
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;">
+                                <option value="" disabled selected>Seleccionar</option>
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+
+                            </select>
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('opExoRe')?.hasError('required') && form.get('opExoRe')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row mb-2" style="margin: 5px;">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Tipo de
+                                Seguro</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select class="form-select" id="opSeguro" formControlName="opSeguro"
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;">
+                                <option value="02">SIS</option>
+                                <option value="01">ESSALUD</option>
+                                <option value="03">EPS</option>
+                                <option value="04">OTRO</option>
+                            </select>
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('opSeguro')?.hasError('required') && form.get('opSeguro')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2" style="margin: 5px;">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Vive
+                                Con</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select class="form-select" [(ngModel)]="selectedSeguro" id="opConvive"
+                                formControlName="opConvive" style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;">
+                                <option value="01">PADRE</option>
+                                <option value="02">MADRE</option>
+                                <option value="03">AMBOS</option>
+                                <option value="04">SOLO</option>
+                                <option value="05">APODERADO</option>
+                            </select>
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('opConvive')?.hasError('required') && form.get('opConvive')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2" style="margin: 5px;">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Persona a
+                                Cargo</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select class="form-select" id="opPCargo" [(ngModel)]="selectedApoderado"
+                                formControlName="opPCargo" style="height: 30px;  width: 150px; font-weight: 505; font-size: 12px; font-weight: 505;">
+                                <option value="01">PADRE</option>
+                                <option value="02">MADRE</option>
+                                <option value="03">AMBOS</option>
+                                <option value="04">SOLO</option>
+
+                            </select>
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('opPCargo')?.hasError('required') && form.get('opPCargo')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2" style="margin: 5px;">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; ">Tiene
+                                Hermanos</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="row" style="margin-left: 1px;">
+                                <select class="form-select mt-1" id="opTieneHermano" [(ngModel)]="selectedHermanos"
+                                    (change)="onSelectionChange($event)" formControlName="opTieneHermano"
+                                    style="height: 30px;   width: 100px; font-size: 12px; font-weight: 505;">
+                                    <option value="" disabled selected>Seleccionar</option>
+                                    <option [value]="true">SI</option>
+                                    <option [value]="false">NO</option>
+                                </select>
+                                <span style="font-size: 11px;"
+                                    *ngIf="form.get('opTieneHermano')?.hasError('required') && form.get('opTieneHermano')?.touched">
+                                    El Campo es Requerido
+                                </span>
+                                <label *ngIf="operation" class="col-form-label mt-1"
+                                    style="height: 30px;  margin-left: 8px; font-size: 12px;">Cuantos:</label>
+                                <input *ngIf="operation" maxlength="2" formControlName="nCantHermanos" type="number" (input)="onInputChange($event)"
+                                    style="height: 30px;  width: 90px; color: black; font-weight: 505; margin-left: 5px;"
+                                    class="form-control mt-1">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row mb-2"
+                        style="margin: 1px; border-top: 2px solid black; margin: 20px 0;">
+                        <h5 style="margin-top: 5px; margin-bottom: 5px;">  DATOS REPRESENTANTE LEGAL - (Responsable de Matricula)</h5>                                             
+                    </div>
+
+
+
+                    <div class="form-group row" style="margin: 5px;">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Tipo
+                                Documento</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select id="option5" class="form-select"
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;" [(ngModel)]="selectedTipoDocRepre"  formControlName="option5">
+                                <option value="" disabled selected>Seleccionar</option>
+                                <option *ngFor="let option1 of listaTipoDoc" [value]="option1.tCodigo">{{
+                                    option1.tDetallado}}
+                                </option>
+                            </select>
+                            <span style="font-size: 11px;"
+                            *ngIf="form.get('option5')?.hasError('required') && form.get('option5')?.touched">
+                            El Campo es Requerido
+                        </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2"          style="margin: 5px; text-align: end; ">
+                            <div class="col-sm-4 Text-end">
+                                <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Nro Documento Representante Legal</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input formControlName="tNroDocumentoRepre" type="text" class="form-control mt-2"
+                                    [readonly]="isReadonly" maxlength="15"
+                                    style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                    placeholder="Ingrese Doc. del Representante Legal"
+                                    oninput="this.value = this.value.toUpperCase()">
+                                <span style="font-size: 11px;"
+                                    *ngIf="form.get('tNroDocumentoRepre')?.hasError('required') && form.get('tNroDocumentoRepre')?.touched">
+                                    El Campo es Requerido
+                                </span>
+                            </div>                        
+                    </div>
+
+                    <div class="form-group row" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Ap.
+                                Paterno</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input formControlName="tAPaternoRepre" maxlength="30" type="text" maxlength="30"
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                class="form-control mt-1" placeholder="Ingrese Paterno"
+                                oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tAPaternoRepre')?.hasError('required') && form.get('tAPaternoRepre')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Apellido
+                                Materno</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input formControlName="tAMaternoRepre" maxlength="30" type="text"
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                class="form-control mt-1" placeholder="Ingrese Apellido Paterno"
+                                oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tAMaternoRepre')?.hasError('required') && form.get('tAMaternoRepre')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2"
+                                style="height: 30px; ">Nombres</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input formControlName="tNombresRepre" maxlength="30" type="text"
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                class="form-control mt-1" placeholder="Ingrese Nombre"
+                                oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tNombresRepre')?.hasError('required') && form.get('tNombresRepre')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2"
+                                style="height: 30px;  ">Direccion</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input #myInputname type="text" id="tDireccionRepre" formControlName="tDireccionRepre" maxlength="190"
+                                class="form-control mt-2" maxlength="200"
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                placeholder="Ingrese Direccion" oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tDireccionRepre')?.hasError('required') && form.get('tDireccionRepre')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2"
+                                style="height: 30px; font-size: 12px; ">Telefono/Celular</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input formControlName="tTelefonoRepre" type="text" maxlength="30" class="form-control mt-2"
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                placeholder="Ingrese Telefono" oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tTelefonoRepre')?.hasError('required') && form.get('tTelefonoRepre')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2" style="margin: 5px; text-align: end;">
+                        <div class="col-sm-4 Text-end">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Correo</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input formControlName="tEmailRepre"  maxlength="40" type="email" class="form-control mt-2"
+                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                placeholder="Ingrese Correo Electronico"
+                                oninput="this.value = this.value.toUpperCase()">
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('tEmailRepre')?.hasError('required') && form.get('tEmailRepre')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2" style="margin: 5px;">
+                        <div class="col-sm-4 Text-end" style="text-align: end;">
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Parentesco:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <select class="form-select" id="opParentescoRepre" [(ngModel)]="selectedParentesco"
+                                formControlName="opParentescoRepre" style="height: 30px; font-weight: 505; width: 150px; font-size: 12px; font-weight: 505;">
+                                <option value="01">PADRE</option>
+                                <option value="02">MADRE</option>
+                           <!--     <option value="03">AMBOS</option>
+                                <option value="04">SOLO</option>
+                        -->      <option value="05">HERMANO</option>
+                                <option value="07">ABUELO</option>
+                                <option value="08">TIO</option>
+                                <option value="09">OTRO</option>
+
+                            </select>
+                            <span style="font-size: 11px;"
+                                *ngIf="form.get('opParentesco')?.hasError('required') && form.get('opParentesco')?.touched">
+                                El Campo es Requerido
+                            </span>
+                        </div>
+                    </div>
+
+
+
                     <div class="row mt-2 text-center">
                         <div class="col-lg-6">
-                            <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Aceptar</button>
+                            <button type="submit" [disabled]="form.invalid" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 10px;">Aceptar</button>
                         </div>
                         <div class="col-lg-6">
                             <button routerLink="/" routerLinkActive="router-link-active"

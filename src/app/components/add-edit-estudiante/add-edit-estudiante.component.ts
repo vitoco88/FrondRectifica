@@ -10,18 +10,20 @@ import { Grado } from '../../interfaces/grado';
 import { Nivel } from '../../interfaces/nivel';
 import { TipoDocumento } from '../../interfaces/tipodocumento';
 import { ToastrService } from 'ngx-toastr';
+import { ProgressBarComponent } from "../../shared/progress-bar/progress-bar.component";
+//import { console } from 'node:inspector';
 
 @Component({
   selector: 'app-add-edit-estudiante',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, FormsModule, ProgressBarComponent],
   templateUrl: './add-edit-estudiante.component.html',
-  styleUrl: './add-edit-estudiante.component.css'  
+  styleUrl: './add-edit-estudiante.component.css'
 })
 export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
 
   form: FormGroup;
-  tCodEstudiante: string  ='';
+  tCodEstudiante: string = '';
   inputvalue: string = '';
 
 
@@ -46,29 +48,58 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
   ];
 
 
+  loading: boolean = true;
 
 
   constructor(private fb: FormBuilder,
     private _estudianteService: EstudianteService,
     private router: Router, private toastr: ToastrService, private aRouter: ActivatedRoute) {
+
+    // this.loading = true;
+
+
+    this.tCodEstudiante = aRouter.snapshot.paramMap.get('tCodEstudiante') || '';
+
+
+
     this.form = this.fb.group({
       tDireccion: ['', Validators.required],
+      tAPaternoEstudiante: ['', Validators.required],
+      tAMaternoEstudiante: ['', Validators.required],
+      tNombresEstudiante: ['', Validators.required],
+
+
       tTelefono: ['', Validators.required],
       // option1: new FormControl(''),
-      option1: [''],
+      option1: ['', Validators.required],
       option: [''],
-      option2:  [''],
-      option3: [''],
-      tApellidosNombres: '',
+      option2: ['', Validators.required],
+      option3: ['', Validators.required],
+      //  tApellidosNombres: '',
       tNroDocumento: '',
-      tEmail: '',
+      tEmail: ['', Validators.required],
       tSexo: '',
       fNacimiento: '',
-      opRatificacion: [''],
-      opDiscapacidad: [''],
-      opExoRe: [''],
+      opRatificacion: ['', Validators.required],
+      opDiscapacidad: ['', Validators.required],
+      opExoRe: ['', Validators.required],
       tDiscapacidadObs: '',
       tDetSexo: '',
+      opSeguro: ['', Validators.required],
+      opConvive: ['', Validators.required],
+      opPCargo: ['', Validators.required],
+      opTieneHermano: false,
+      tNroDocumentoRepre: ['', Validators.required],
+      option5: [''],
+      tAPaternoRepre: ['', Validators.required],
+      tAMaternoRepre: ['', Validators.required],
+      tNombresRepre: ['', Validators.required],
+      tDireccionRepre: ['', Validators.required],
+      tTelefonoRepre: ['', Validators.required],
+      tEmailRepre: ['', Validators.required],
+      opParentesco: [''],
+      opParentescoRepre: '',
+      nCantHermanos: ''
 
     })
 
@@ -78,14 +109,13 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
+    //  throw new Error('Method not implemented.');
   }
 
-
+  selectedValue1: string = '01'; // Valor inicial seleccionado
 
   ngOnInit(): void {
 
-  
     // Acceder al estado de la navegación (sin parámetros en la URL)
     const state = history.state;  // Obtiene el 'state' de la navegación
     if (state && state.tCodEstudiante) {
@@ -97,6 +127,8 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
     this.getGrados();
 
     this.getEstudiante(this.tCodEstudiante);
+
+    this.loading = false;
 
   }
 
@@ -175,72 +207,222 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
   lDiscapacidadt: boolean = false;
   lExoneradot: boolean = false;
 
+  lHermanos: boolean = false;
+
   RegistrarEstudiante() {
     // console.log(this.form.get('opExoRe')?.value);
 
-    this.lRatificaciont = false;
-    this.lDiscapacidadt = false;
-    this.lExoneradot = false;
-
-
-    if (this.form.get('opExoRe')?.value == 'SI') {
-      this.lExoneradot = true;
-    }
-    if (this.form.get('opDiscapacidad')?.value == 'SI') {
-      this.lDiscapacidadt = true;
-    }
-    if (this.form.get('opRatificacion')?.value == 'SI') {
-      this.lRatificaciont = true;
-    }
 
 
 
-
-    const estudiante: Estudiante = {
-      tDireccion: this.form.value.tDireccion,
-      tTelefono: this.form.value.tTelefono,
-      tEmail: this.form.value.tEmail,
-
-      tCodDistrito: this.form.get('option')?.value,
-      lExonaradoR: this.lExoneradot,
-      lDiscapacidad: this.lDiscapacidadt,
-      tDiscapacidadObs: this.form.get('tDiscapacidadObs')?.value,
-      lRatificacion: this.lRatificaciont,
-      tCodGrado: this.form.get('option3')?.value,
-      tNivel: this.form.get('option2')?.value,
-      tEstadoRegistro: '02'
-      // tCodEstudiante: this.tCodEstudiante
-    }
-
-    /*
-    
-        console.log(this.tCodEstudiante);
-        console.log(estudiante.tDireccion);
-        console.log(estudiante.tTelefono);
-        console.log(estudiante.tEmail);
-        console.log(estudiante.tCodDistrito);
-        console.log(estudiante.lExonaradoR);
-        console.log(estudiante.lDiscapacidad);
-        console.log(estudiante.lRatificacion);
-        console.log(estudiante.tCodGrado);
-        console.log(estudiante.tNivel);
+    const confirmar = window.confirm('¿Estás seguro de que deseas enviar los datos?');
+    if (confirmar) {
+      /*      if (this.tEstadoRegistro == "02" || this.tEstadoRegistro == "03") {
+              this.toastr.info("No se puede modificar comuniquese con la institución");
+              //   this.router.navigate(['/']);
+            }
+        */
+      /*   else {  
+      
     */
+      this.lRatificaciont = false;
+      this.lDiscapacidadt = false;
+      this.lExoneradot = false;
+      if (this.form.get('opExoRe')?.value == 'SI') {
+        this.lExoneradot = true;
+      }
+      if (this.form.get('opDiscapacidad')?.value == 'SI') {
+        this.lDiscapacidadt = true;
+      }
+      if (this.form.get('opRatificacion')?.value == 'SI') {
+        this.lRatificaciont = true;
+      }
+      //   if (this.form.get('opTieneHermano')?.value == 'SI') {
+      //      this.lHermanos = true;
+      //  }
 
-    estudiante.tCodEstudiante = this.tCodEstudiante;
-    this._estudianteService.UpdateEstudiante(this.tCodEstudiante, estudiante).subscribe(() => {
-      this.toastr.success("Registrado Correctamente");
-      this.router.navigate(['/']);
-    })
+      const selectSeguro = document.getElementById("opSeguro") as HTMLSelectElement;
+      //  const selectSexo = document.getElementById("opSexo") as HTMLSelectElement;
+      const selectVive = document.getElementById("opConvive") as HTMLSelectElement;
+      const selectApoderado = document.getElementById("opPCargo") as HTMLSelectElement;
+
+
+      const selectTipoCodigoEst = document.getElementById("option1") as HTMLSelectElement;
+
+      //  console.log("enviando " + selectTipoCodigoEst.value)
+
+      const selectTipoDocRepre = document.getElementById("option5") as HTMLSelectElement;
+
+      //  const selectTipoDocRdepre = document.getElementById("opTieneHermano") as HTMLSelectElement;
+
+
+
+      //  console.log("enviando " + selectTipoCodigoEst);
+
+      const estudiante: Estudiante = {
+        tDireccion: this.form.value.tDireccion.trim(),
+        tTelefono: this.form.value.tTelefono.trim(),
+        tEmail: this.form.value.tEmail.trim(),
+        fNacimiento: this.form.value.fNacimiento,
+        tCodDistrito: this.form.get('option')?.value,
+        tCodTipoDocumento: selectTipoCodigoEst.value,
+        tTipoDocumentoRepre: selectTipoDocRepre.value,
+        tAPaternoRepre: this.form.value.tAPaternoRepre.trim(),
+        tAMaternoRepre: this.form.value.tAMaternoRepre.trim(),
+        tNombresRepre: this.form.value.tNombresRepre.trim(),
+        tNroDocumentoRepre: this.form.value.tNroDocumentoRepre.trim(),
+        tDireccionRepre: this.form.value.tDireccionRepre.trim(),
+        tEmailRepre: this.form.value.tEmailRepre.trim(),
+        tTelefonoRepre: this.form.value.tTelefonoRepre.trim(),
+        tParentescoRepre: this.selectedParentesco,
+        tCodParentescoRepre: this.selectedParentesco,
+
+        tAMaterno: this.form.value.tAMaternoEstudiante.trim(),
+        tAPaterno: this.form.value.tAPaternoEstudiante.trim(),
+        tNombres: this.form.value.tNombresEstudiante.trim(),
+
+        tCodSeguro: selectSeguro.value,
+        tVive: selectVive.value,
+        tApoderado: selectApoderado.value,
+
+        //   const selectSeguro = document.getElementById("opSeguro") as HTMLSelectElement;
+        //  const selectSexo = document.getElementById("opSexo") as HTMLSelectElement;
+        //     const selectVive = document.getElementById("opConvive") as HTMLSelectElement;
+        //   const selectApoderado = document.getElementById("opPCargo") as HTMLSelectElement;
+
+        lHermanos: this.selectedHermanos,
+        lExonaradoR: this.lExoneradot,
+        lDiscapacidad: this.lDiscapacidadt,
+        tDiscapacidadObs: this.form.get('tDiscapacidadObs')?.value.trim(),
+        lRatificacion: this.lRatificaciont,
+        tCodGrado: this.form.get('option3')?.value,
+        tNivel: this.form.get('option2')?.value,
+        //   nCantHermanos : this.form.get('nCantHermanos')?.value,
+        tEstadoRegistro: '02' // ratificado
+        // tCodEstudiante: this.tCodEstudiante
+      }
+
+      //      console.log("tiene hermanos :" + this.selectedHermanos);
+
+      if (this.selectedHermanos == true) {
+        estudiante.nCantHermanos = this.form.get('nCantHermanos')?.value;
+
+        //  console.log("son :" +estudiante.nCantHermanos);
+
+        if (this.form.get('nCantHermanos')?.value == "") {
+          estudiante.nCantHermanos = 0;
+          //  console.log("son por dejar vacio :" +estudiante.nCantHermanos);
+        }
+      }
+      else {
+          console.log("marco no :" + this.selectedHermanos);
+        estudiante.nCantHermanos = 0;
+      }
+
+
+
+
+      estudiante.tCodEstudiante = this.tCodEstudiante;
+
+
+      //   console.log(estudiante);
+      //    console.log(estudiante);
+      this._estudianteService.UpdateEstudiante(this.tCodEstudiante, estudiante).subscribe(() => {
+        this.toastr.success("Registrado Correctamente");
+        this.router.navigate(['/']);
+      })
+
+      //   }
+
+
+    } else {
+      // Si el usuario cancela, no hacer nada
+      console.log('Operación cancelada');
+    }
 
   }
 
+  operation: boolean = false;
+  // Método para manejar el cambio de selección
+  onSelectionChange(event: any): void {
+    const valorSeleccionado = event.target.value === 'true'; // Asegurarse de que sea booleano
+    //  console.log(valorSeleccionado);
+    if (valorSeleccionado == false) {
+      this.form.get('tNroHermanos')?.setValue('');
+    }
+    else {
+      this.form.get('tNroHermanos')?.setValue('');
+    }
+
+
+    this.operation = valorSeleccionado
+    //console.log('Valor de miVariable:', this.miVariable); // Solo se asigna true si selecciona "SI"
+  }
+  isReadonly = false;
+
+  tEstadoRegistro?: string = '';
+  selectedSeguro?: string;
+  selectedParentesco?: string;
+  selectedApoderado?: string;
+  selectedHermanos?: boolean;
+  selectedTipoDocRepre?: string;
+
+  onInputChange(event: any): void {
+
+    /*
+    const currentValue = event.target.value;
+
+    // Si la entrada no cumple con la expresión regular, la corregimos
+    if (!this.regex.test(currentValue)) {
+      event.target.value = currentValue.replace(/[^a-zA-Z0-9]/g, ''); // Elimina caracteres no permitidos
+    }
+
+    */
+
+
+    let currentValue = event.target.value;
+    if (/^[a-zA-Z0-9]/.test(currentValue)) {
+      // Reemplaza caracteres no permitidos, pero permite letras, números y espacios
+      event.target.value = currentValue.replace(/[^a-zA-Z0-9 ]/g, '');
+    } else {
+      // Si el primer carácter no es válido, puedes limpiar el valor o manejarlo de otra manera
+      event.target.value = '';
+    }
+  }
+
+
   getEstudiante(id: string) {
+
+
     this._estudianteService.getEstudiante(id).subscribe((data: Estudiante) => {
-     // console.log(data);
+
+      //   console.log("recibido " + data);
+      // console.log(data);
+           console.log("Response completo:", JSON.stringify(data, null, 2));
+      if (data.lHermanos) {
+        this.operation = true;
+
+        if (data.nCantHermanos != null) {
+          this.form.patchValue({
+            nCantHermanos: data.nCantHermanos
+          });          
+        }
+        else{
+          this.form.patchValue({
+            nCantHermanos: '0'
+          });   
+        }
+      }
+
+
+
+
 
       this.form.patchValue({
+        tAPaternoEstudiante: data.tAPaterno,
+        tAMaternoEstudiante: data.tAMaterno,
+        tNombresEstudiante: data.tNombres,
         tTelefono: data.tTelefono,
-        tApellidosNombres: data.tApellidosNombres,
         tNroDocumento: data.tNroDocumento,
         fNacimiento: data.fNacimiento,
         tEmail: data.tEmail,
@@ -250,16 +432,97 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
         tDetSexo: data.tDetSexo,
         tDireccion: data.tDireccion,
         tDiscapacidadObs: data.tDiscapacidadObs,
-        option: data.tCodDistrito
-
+        tDireccionRepre: data.tDireccionRepre,
+        tNroDocumentoRepre: data.tNroDocumentoRepre,
+        tAPaternoRepre: data.tAPaternoRepre,
+        tAMaternoRepre: data.tAMaternoRepre,
+        tNombresRepre: data.tNombresRepre,
+        tTipoDocumentoRepre: data.tTipoDocumentoRepre,
+        tTelefonoRepre: data.tTelefonoRepre,
+        tEmailRepre: data.tEmailRepre,
+        selectedParentesco: data.tCodParentescoRepre,
+        opTieneHermano: data.lHermanos
 
       });
+
+      this.selectedParentesco = data.tCodParentescoRepre;
+
+
+      this.selectedTipoDocRepre = data.tTipoDocumentoRepre;
+      //   console.log("ddd "+ this.selectedParentesco);
+      //    console.log(data.tCodParentescoRepre);
+
+      this.form.get('opParentescoRepre')?.setValue(this.selectedParentesco);
+      this.form.get('option5')?.setValue(this.selectedTipoDocRepre);
+
+      if (data.tCodDistrito !== null) {
+        this.form.get('option')?.setValue(data.tCodDistrito);
+      }
       // console.log(data.lExonaradoR);
       this.getValorExoReligion(data.lExonaradoR ?? false);
       this.getValorDisca(data.lDiscapacidad ?? false);
       this.getValorRatificacion(data.lRatificacion ?? false);
+      //    this.getValorSeguro(data.tCodSeguro);
+      // Asumiendo que 'data.tCodSeguro' contiene el valor que quieres seleccionar
+
+      console.log(data.tVive);
+      this.form.get('opSeguro')?.setValue(data.tCodSeguro);
+      //     this.form.get('opConVive')?.setValue(data.tVive);
+      //this.form.get('opPCargo')?.setValue(data.tApoderado);
+      this.selectedSeguro = data.tVive;
+
+
+      //   console.log(data.tApoderado);
+      this.selectedApoderado = data.tApoderado;
+      //
+      //     console.log(data.lHermanos);
+      this.selectedHermanos = data.lHermanos;
+
+
+      this.tEstadoRegistro = data.tEstadoRegistro;
+
+      //      console.log("hola " + data.tEstadoRegistro);
+
+      if (data.tEstadoRegistro == "03" || data.tEstadoRegistro == "02") {
+
+        /*
+                this.isReadonly = true;
+        
+                this.form.get('opExoRe')?.disable();
+        
+        
+                this.form.get('opRatificacion')?.disable();
+        
+                this.form.get('opDiscapacidad')?.disable();
+        
+                this.form.get('option')?.disable();
+                this.form.get('option1')?.disable();
+                this.form.get('option2')?.disable();
+                this.form.get('option3')?.disable();
+        
+        
+                this.form.get('opSeguro')?.disable();
+                this.form.get('opConvive')?.disable();
+                this.form.get('opPCargo')?.disable();
+                this.form.get('opTieneHermano')?.disable();
+            */
+
+
+
+
+        //      console.log("hola " + data.tEstadoRegistro);
+
+      }
+
+
+
+
+
     });
+
   }
+
+
 
 
   getDistritos() {
@@ -276,7 +539,7 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
   getNiveles() {
     this._estudianteService.getNiveles().subscribe((data) => {
       this.listaNiveles = data;
-      console.log(data);
+      //   console.log(data);
     })
   };
 
@@ -296,7 +559,7 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
   getTipoDocumentos() {
     this._estudianteService.getTipoDocumentos().subscribe((data) => {
       this.listaTipoDoc = data;
-      console.log(data);
+      //  console.log(data);
     })
   };
 }

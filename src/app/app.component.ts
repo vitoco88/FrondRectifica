@@ -13,4 +13,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   title = 'FrondRectificacion';
+
+
+  static ValorBusqueda: string = ''
+
+
 }

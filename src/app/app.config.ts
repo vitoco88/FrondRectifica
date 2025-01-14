@@ -25,6 +25,7 @@ export const appConfig: ApplicationConfig = {
     provideToastr({
       timeOut:2000, 
       preventDuplicates: true,
+       
        positionClass: 'toast-top-center'}),
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes), 

@@ -33,8 +33,20 @@ export interface Estudiante{
     tDetNivel?: string;
     tApellidosNombres? : string;
     tDetSexo?: string;
-    lRatificacion?: boolean
+    lRatificacion?: boolean;
+    tVive?: string;
+    tApoderado?:string;
+    lHermanos?: boolean;
+    nCantHermanos?: number;
 
-
-
+    tNroDocumentoRepre?: number;
+    tAPaternoRepre?: string;
+    tAMaternoRepre?: string;
+    tNombresRepre?: string;
+    tTipoDocumentoRepre?: string;
+    tParentescoRepre?: string;
+    tDireccionRepre?: string;
+    tTelefonoRepre?: string;
+    tEmailRepre?: string;
+    tCodParentescoRepre?: string;
 }
