@@ -12,6 +12,7 @@ import { AddEditApoderadosComponent } from '../add-edit-apoderados/add-edit-apod
 import { AddEditEstudianteComponent } from '../add-edit-estudiante/add-edit-estudiante.component';
 import { ListApoderadosComponent } from '../list-apoderados/list-apoderados.component';
 import { AppComponent } from '../../app.component';
+import { SharedService } from '../../services/shared.service';
 //import { console } from 'node:inspector';
 
 
@@ -41,9 +42,9 @@ export class ListEstudiantesComponent implements OnInit, AfterViewInit, AfterRen
 
   listEstudiantes: Estudiante[] = [];
   tNroDocumento: string = '';
-  constructor(private _estudianteService: EstudianteService, private router: Router, private toastr: ToastrService) {
+  constructor(private _estudianteService: EstudianteService, private router: Router, private toastr: ToastrService, private sharedService: SharedService) {
 
-   
+
 
     //   console.log("variba " + AppComponent.ValorBusqueda);
   }
@@ -59,8 +60,8 @@ export class ListEstudiantesComponent implements OnInit, AfterViewInit, AfterRen
 
   ngAfterViewInit(): void {
     //  console.log('Method not implemented.2');
-   
-    this.inputRef.nativeElement.focus();
+
+   // this.inputRef.nativeElement.focus();
   }
 
   onEnter(): void {
@@ -75,40 +76,52 @@ export class ListEstudiantesComponent implements OnInit, AfterViewInit, AfterRen
 
   ngOnInit(): void {
 
-    //   console.log("variba nro documento" + ListEstudiantesComponent.VariableEstatica);
-    //  console.log("variba1 " + this.selectedValue1);
 
-    this.tNroDocumento = ListEstudiantesComponent.VariableEstatica;
 
-    if(ListEstudiantesComponent.valorBuquedaStatica.length >0)
-    {
-    this.selectedValue1 = ListEstudiantesComponent.valorBuquedaStatica;
+    // Al regresar, obtén el valor compartido
+    const value = this.sharedService.getValue();
+    if (value) {
+      this.tNroDocumento = value;
+      this.sharedService.clearValue(); // Limpia el valor compartido
     }
-    else{
-      this.selectedValue1 = "02";
-    }
-    // 62960109
+
+    else {
 
 
-    // console.log('hola');
+      //   console.log("variba nro documento" + ListEstudiantesComponent.VariableEstatica);
+      //  console.log("variba1 " + this.selectedValue1);
 
-    if (this.selectedValue1 == '01') {
-      this.loading = true;
       this.tNroDocumento = ListEstudiantesComponent.VariableEstatica;
-      this._estudianteService.getEstudiantes(ListEstudiantesComponent.VariableEstatica).subscribe((data) => {
-        this.listEstudiantes = data;
-        this.loading = false;
-        //   console.log(data);
-      })
-    }
 
-    if (this.selectedValue1 == '02') {
-      this.loading = true;
-      this._estudianteService.getEstudiantesbyEstudent(this.tNroDocumento).subscribe((data) => {
-        this.listEstudiantes = data;
-        //  console.log(data);
-        this.loading = false;
-      });
+      if (ListEstudiantesComponent.valorBuquedaStatica.length > 0) {
+        this.selectedValue1 = ListEstudiantesComponent.valorBuquedaStatica;
+      }
+      else {
+        this.selectedValue1 = "02";
+      }
+      // 62960109
+
+
+      // console.log('hola');
+
+      if (this.selectedValue1 == '01') {
+        this.loading = true;
+        this.tNroDocumento = ListEstudiantesComponent.VariableEstatica;
+        this._estudianteService.getEstudiantes(ListEstudiantesComponent.VariableEstatica).subscribe((data) => {
+          this.listEstudiantes = data;
+          this.loading = false;
+          //   console.log(data);
+        })
+      }
+
+      if (this.selectedValue1 == '02') {
+        this.loading = true;
+        this._estudianteService.getEstudiantesbyEstudent(this.tNroDocumento).subscribe((data) => {
+          this.listEstudiantes = data;
+          //  console.log(data);
+          this.loading = false;
+        });
+      }
     }
 
   }

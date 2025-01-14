@@ -260,26 +260,26 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
       //  console.log("enviando " + selectTipoCodigoEst);
 
       const estudiante: Estudiante = {
-        tDireccion: this.form.value.tDireccion.trim(),
-        tTelefono: this.form.value.tTelefono.trim(),
-        tEmail: this.form.value.tEmail.trim(),
+        tDireccion: this.form.value.tDireccion,
+        tTelefono: this.form.value.tTelefono,
+        tEmail: this.form.value.tEmail,
         fNacimiento: this.form.value.fNacimiento,
         tCodDistrito: this.form.get('option')?.value,
         tCodTipoDocumento: selectTipoCodigoEst.value,
         tTipoDocumentoRepre: selectTipoDocRepre.value,
-        tAPaternoRepre: this.form.value.tAPaternoRepre.trim(),
-        tAMaternoRepre: this.form.value.tAMaternoRepre.trim(),
-        tNombresRepre: this.form.value.tNombresRepre.trim(),
-        tNroDocumentoRepre: this.form.value.tNroDocumentoRepre.trim(),
-        tDireccionRepre: this.form.value.tDireccionRepre.trim(),
-        tEmailRepre: this.form.value.tEmailRepre.trim(),
-        tTelefonoRepre: this.form.value.tTelefonoRepre.trim(),
+        tAPaternoRepre: this.form.value.tAPaternoRepre,
+        tAMaternoRepre: this.form.value.tAMaternoRepre,
+        tNombresRepre: this.form.value.tNombresRepre,
+        tNroDocumentoRepre: this.form.value.tNroDocumentoRepre,
+        tDireccionRepre: this.form.value.tDireccionRepre,
+        tEmailRepre: this.form.value.tEmailRepre,
+        tTelefonoRepre: this.form.value.tTelefonoRepre,
         tParentescoRepre: this.selectedParentesco,
         tCodParentescoRepre: this.selectedParentesco,
 
-        tAMaterno: this.form.value.tAMaternoEstudiante.trim(),
-        tAPaterno: this.form.value.tAPaternoEstudiante.trim(),
-        tNombres: this.form.value.tNombresEstudiante.trim(),
+        tAMaterno: this.form.value.tAMaternoEstudiante,
+        tAPaterno: this.form.value.tAPaternoEstudiante,
+        tNombres: this.form.value.tNombresEstudiante,
 
         tCodSeguro: selectSeguro.value,
         tVive: selectVive.value,
@@ -293,7 +293,7 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
         lHermanos: this.selectedHermanos,
         lExonaradoR: this.lExoneradot,
         lDiscapacidad: this.lDiscapacidadt,
-        tDiscapacidadObs: this.form.get('tDiscapacidadObs')?.value.trim(),
+        tDiscapacidadObs: this.form.get('tDiscapacidadObs')?.value,
         lRatificacion: this.lRatificaciont,
         tCodGrado: this.form.get('option3')?.value,
         tNivel: this.form.get('option2')?.value,
@@ -326,7 +326,7 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
 
 
       //   console.log(estudiante);
-      //    console.log(estudiante);
+          console.log(estudiante);
       this._estudianteService.UpdateEstudiante(this.tCodEstudiante, estudiante).subscribe(() => {
         this.toastr.success("Registrado Correctamente");
         this.router.navigate(['/']);

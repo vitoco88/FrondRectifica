@@ -11,6 +11,7 @@ import { Distrito } from '../../interfaces/distritos';
 import { Estudiante } from '../../interfaces/estudiante';
 import { Apoderado } from '../../interfaces/apoderado';
 import { NavbarComponent } from "../navbar/navbar.component";
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-matricula-estudiantes',
@@ -46,7 +47,7 @@ export class MatriculaEstudiantesComponent implements OnInit, AfterViewInit {
     { tCodigo: '01', tDetallado: 'Arequipa' }
   ];
   constructor(private fb: FormBuilder, private fb2: FormBuilder, private fb3: FormBuilder,
-    private _estudianteService: EstudianteService,
+    private _estudianteService: EstudianteService, private sharedService: SharedService,
     private router: Router, private toastr: ToastrService, private aRouter: ActivatedRoute) {
     this.form = this.fb.group({
       tDireccion: ['', Validators.required],
@@ -240,7 +241,7 @@ export class MatriculaEstudiantesComponent implements OnInit, AfterViewInit {
   lDiscapacidadt: boolean = false;
   lExoneradot: boolean = false;
   lHermanos: boolean = false;
-
+  selectedHermanos?: boolean;
   MatricularEstudiante() {
 
     const usernameInput = this.form.get('tNroDocumento')?.value.trim();
@@ -265,9 +266,9 @@ export class MatriculaEstudiantesComponent implements OnInit, AfterViewInit {
       if (this.form.get('opDiscapacidad')?.value == 'SI') {
         this.lDiscapacidadt = true;
       }
-      if (this.form.get('opTieneHermano')?.value == 'SI') {
-        this.lHermanos = true;
-      }
+   //   if (this.form.get('opTieneHermano')?.value == 'SI') {
+   //     this.lHermanos = true;
+  //    }
       const selectSeguro = document.getElementById("opSeguro") as HTMLSelectElement;
       const selectSexo = document.getElementById("opSexo") as HTMLSelectElement;
       const selectVive = document.getElementById("opConvive") as HTMLSelectElement;
@@ -305,7 +306,7 @@ export class MatriculaEstudiantesComponent implements OnInit, AfterViewInit {
         tCodSeguro: selectSeguro.value,
         tVive: selectVive.value,
         tApoderado: selectApoderado.value,
-        lHermanos: this.lHermanos,
+        lHermanos: this.selectedHermanos,
         nCantHermanos: this.form.value.nCantHermanos === "" ? 0 : this.form.value.nCantHermanos,
         tDireccion: this.form.value.tDireccion.trim(),
         tTelefono: this.form.value.tTelefono.trim(),
@@ -458,7 +459,8 @@ export class MatriculaEstudiantesComponent implements OnInit, AfterViewInit {
         }
         else {
           this.toastr.success("Estudiante Matriculado Correctamente");  // Muestra un mensaje de éxito
-
+          console.log("pasando : " + this.form.get('tNroDocumento')?.value)
+          this.sharedService.setValue(this.form.get('tNroDocumento')?.value);  
           this.router.navigate(['/']);  // Navega a la página principal
         }
       });

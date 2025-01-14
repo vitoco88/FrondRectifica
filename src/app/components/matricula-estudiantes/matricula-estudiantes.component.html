@@ -413,7 +413,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <div class="row" style="margin-left: 1px;">
-                                    <select class="form-select mt-1" id="opTieneHermano"
+                                    <select class="form-select mt-1" id="opTieneHermano" [(ngModel)]="selectedHermanos"
                                         (change)="onSelectionChange($event)" formControlName="opTieneHermano"
                                         style="height: 30px; font-size: 12px;  width: 100px;">
                                         <option [value]="true">SI</option>
@@ -440,10 +440,10 @@
                                 </div>
                                 <div class="col-lg-2">
                                     <button type="submit" [disabled]="form.invalid"
-                                        class="btn btn-primary">Aceptar</button>
+                                        class="btn btn-primary" style="margin-top: 10px; margin-bottom: 10px;">Aceptar</button>
                                 </div>
                                 <div class="col-lg-2">
-                                    <button routerLink="/" routerLinkActive="router-link-active"
+                                    <button routerLink="/" style="margin-top: 10px; margin-bottom: 10px;" routerLinkActive="router-link-active"
                                         routerLinkActive="router-link-active" type="button"
                                         class="btn btn-secondary">Volver</button>
                                 </div>
