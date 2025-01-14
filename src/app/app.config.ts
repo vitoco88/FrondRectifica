@@ -7,7 +7,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 export const appConfig: ApplicationConfig = {
-  providers: [
+ /* providers: [
     provideAnimations(),
     provideToastr({
       timeOut:1500, 
@@ -18,4 +18,19 @@ export const appConfig: ApplicationConfig = {
         provideClientHydration(withEventReplay()),
         provideHttpClient(withFetch())  
     ]
+        */
+
+ providers: [
+    provideAnimations(),
+    provideToastr({
+      timeOut:2000, 
+      preventDuplicates: true,
+       positionClass: 'toast-top-center'}),
+    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideRouter(routes), 
+        provideClientHydration(withEventReplay()),
+        provideHttpClient(withFetch())  
+    ]
+        
+
 };

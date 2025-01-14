@@ -36,13 +36,13 @@ export class ListEstudiantesComponent implements OnInit {
 
   listEstudiantes: Estudiante[] = [];
   tNroDocumento: string = '';
-  constructor(private _estudianteService: EstudianteService, private router: Router) {
+  constructor(private _estudianteService: EstudianteService, private router: Router, private toastr: ToastrService) {
 
   }
 
   ngOnInit(): void {
 
-   console.log('hola');
+    console.log('hola');
     if (ListEstudiantesComponent.VariableEstatica) {
       this.loading = true;
 
@@ -56,16 +56,20 @@ export class ListEstudiantesComponent implements OnInit {
   }
 
   getListEstudiantes() {
-console.log('hola2');
-   
-    this.loading = true;
-    this._estudianteService.getEstudiantes(this.tNroDocumento).subscribe((data) => {
-      this.listEstudiantes = data;
-      this.loading = false;
-      ListEstudiantesComponent.VariableEstatica = this.tNroDocumento;
-      //   console.log(data);
+    console.log('hola2');
+    if (this.tNroDocumento.length > 0) {
+      this.loading = true;
+      this._estudianteService.getEstudiantes(this.tNroDocumento).subscribe((data) => {        
+        this.listEstudiantes = data;
+        this.loading = false;
+        ListEstudiantesComponent.VariableEstatica = this.tNroDocumento;
+        //   console.log(data);
+      });
+    }
+    else {
+      this.toastr.error("Ingrese un Documento Valido", "Información")
+    }
 
-    });
   };
 
 

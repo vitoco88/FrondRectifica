@@ -5,7 +5,8 @@
             <!-- Input con un margen derecho -->
             <input [(ngModel)]="tNroDocumento" maxlength="15" type="text" class="form-control custom-width me-3" id="input-field" placeholder="Escribe algo">
             <!-- Button con un margen izquierdo -->
-            <button   (click)="getListEstudiantes()" class="btn btn-primary" id="submit-btn">Enviar</button>
+            <button   (click)="getListEstudiantes()" class="btn btn-primary" style="margin: 3px;" id="submit-btn">Enviar</button>
+            <button  routerLink="/Matricula/"  class="btn btn-secondary" id="submit-btn2" style="margin: 3px;">Nueva Matricula</button>
         </div>
     </div>
     <h5 style="margin-top:  10px; display: flex ; justify-content: space-between;">Listado de Estudiantes</h5>

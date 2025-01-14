@@ -236,7 +236,7 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
 
   getEstudiante(id: string) {
     this._estudianteService.getEstudiante(id).subscribe((data: Estudiante) => {
-      console.log(data);
+     // console.log(data);
 
       this.form.patchValue({
         tTelefono: data.tTelefono,
