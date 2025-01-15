@@ -14,7 +14,7 @@
                         </div>
                         <div class="col-sm-8">
                             <input formControlName="tApellidosNombres" type="text" readonly
-                                style="height: 30px;  color: black; font-weight: 505;"
+                                style="height: 30px;  color: black; font-weight: 700;"
                                 class="form-control mt-1" placeholder="Ingrese Nombre"
                                 oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
@@ -32,7 +32,7 @@
                         </div>
                         <div  class="col-sm-8">
                             <input  formControlName="tAPaternoEstudiante" type="text"  
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 class="form-control mt-1" placeholder="Ingrese Nombre"
                                 oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
@@ -50,7 +50,7 @@
                         </div>
                         <div class="col-sm-8">
                             <input formControlName="tAMaternoEstudiante" type="text"  
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 class="form-control mt-1" placeholder="Ingrese Nombre"
                                 oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
@@ -68,7 +68,7 @@
                         </div>
                         <div class="col-sm-8">
                             <input formControlName="tNombresEstudiante" type="text"  
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 class="form-control mt-1" placeholder="Ingrese Nombre"
                                 oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
@@ -95,8 +95,8 @@
                         </div>
                         <div class="col-sm-8">
                             <select id="option1" class="form-select"  
-                                style="height: 30px;  width: 150px; font-weight: 505; font-size: 12px;" formControlName="option1">
-                                <option style="font-weight: 505;" *ngFor="let option1 of listaTipoDoc" [value]="option1.tCodigo">{{
+                                style="height: 30px;  width: 150px; font-weight: 700; font-size: 12px;" formControlName="option1">
+                                <option style="font-weight: 700;" *ngFor="let option1 of listaTipoDoc" [value]="option1.tCodigo">{{
                                     option1.tDetallado}}
                                 </option>
                             </select>
@@ -111,7 +111,7 @@
                         <div class="col-sm-8">
                             <input #myInputname formControlName="tNroDocumento" type="text" readonly
                                 class="form-control mt-2"
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
                                 *ngIf="form.get('tNroDocumento')?.hasError('required') && form.get('tNroDocumento')?.touched">
@@ -127,7 +127,7 @@
                         </div>
                         <div class="col-sm-8">
                             <input formControlName="fNacimiento" type="date" class="form-control mt-2"
-                                style="height: 30px;   color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;   color: black; font-weight: 700; font-size: 12px;"
                                 placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
                                 *ngIf="form.get('fNacimiento')?.hasError('required') && form.get('fNacimiento')?.touched">
@@ -144,7 +144,7 @@
                         <div class="col-sm-8">
                             <input type="text" id="tDetSexo" formControlName="tDetSexo" readonly
                                 class="form-control mt-2"
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
 
                         </div>
@@ -156,7 +156,7 @@
                             <label class="col-form-label mt-2" style="height: 30px; font-size: 12px;">Distrito</label>
                         </div>
                         <div class="col-sm-8">
-                            <select class="form-select" id="option" style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;"
+                            <select class="form-select" id="option" style="height: 30px;  width: 150px; font-size: 12px; font-weight: 700;"
                                 formControlName="option">
                                 <option value="" disabled selected>Seleccionar</option>
                                 <option *ngFor="let option of listaDistritos" [value]="option.tCodigo">{{
@@ -178,7 +178,7 @@
                         <div class="col-sm-8">
                             <input #myInputname type="text" formControlName="tDireccion" [readonly]="isReadonly"
                                 maxlength="190" class="form-control mt-2"
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 placeholder="Ingrese Nombre" oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
                                 *ngIf="form.get('tDireccion')?.hasError('required') && form.get('tDireccion')?.touched">
@@ -193,7 +193,7 @@
                         <div class="col-sm-8">
                             <input formControlName="tTelefono" type="text" maxlength="28" class="form-control mt-2"
                                 [readonly]="isReadonly"
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 placeholder="Ingrese Telefono" oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
                                 *ngIf="form.get('tTelefono')?.hasError('required') && form.get('tTelefono')?.touched">
@@ -208,7 +208,7 @@
                         <div class="col-sm-8">
                             <input formControlName="tEmail" type="text" class="form-control mt-2"
                                 [readonly]="isReadonly"
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 placeholder="Ingrese Correo Electronico"
                                 oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
@@ -224,7 +224,7 @@
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" id="option2"
-                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;" formControlName="option2">
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 700;" formControlName="option2">
                                 <option value="" disabled selected>Seleccionar</option>
                                 <option *ngFor="let option2 of listaNiveles" [value]="option2.tCodigo">{{
                                     option2.tDetallado}}
@@ -243,7 +243,7 @@
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" id="option3"
-                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;" formControlName="option3">
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 700;" formControlName="option3">
                                 <option value="" disabled selected>Seleccionar</option>
                                 <option *ngFor="let option3 of listaGrados" [value]="option3.tCodigo">{{
                                     option3.tDetallado}}
@@ -259,7 +259,7 @@
 
                     <div class="form-group row mb-2" style="margin: 5px;">
                         <div class="col-sm-4 Text-end" style="text-align: end;">
-                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; font-weight: 505;">Ratificación de
+                            <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; font-weight: 700;">Ratificación de
                                 Matricula</label>
                         </div>
                         <div class="col-sm-8">
@@ -287,7 +287,7 @@
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" id="opDiscapacidad" formControlName="opDiscapacidad"
-                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;"
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 700;"
                                 (change)="verificarValorDiscapacidad()">
                                 <option value="" disabled selected>Seleccionar</option>
                                 <option value="SI">SI</option>
@@ -306,13 +306,13 @@
                         </div>
                         <div class="col-sm-8">
                             <!--   <input #myInputname type="text" maxlength="190" formControlName="tDiscapacidadObs" class="form-control mt-2"
-                                style="height: 30px;  color: black; font-weight: 505;" placeholder="Ingrese Detalle"
+                                style="height: 30px;  color: black; font-weight: 700;" placeholder="Ingrese Detalle"
                                 oninput="this.value = this.value.toUpperCase()">
                         -->
 
                             <textarea #myInputname maxlength="190" formControlName="tDiscapacidadObs"
                                 class="form-control mt-2" [readonly]="isReadonly"
-                                style="resize: none;   color: black; font-weight: 505; min-height: 70px; font-size: 12px;"
+                                style="resize: none;   color: black; font-weight: 700; min-height: 70px; font-size: 12px;"
                                 placeholder="Ingrese Detalle"
                                 (input)="myInputname.value = myInputname.value.toUpperCase()"></textarea>
                         </div>
@@ -343,7 +343,7 @@
                         </div>
                         <div class="col-sm-8 ">
                             <select class="form-select" id="opExoRe" formControlName="opExoRe"
-                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;">
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 700;">
                                 <option value="" disabled selected>Seleccionar</option>
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
@@ -364,7 +364,7 @@
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" id="opSeguro" formControlName="opSeguro"
-                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;">
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 700;">
                                 <option value="02">SIS</option>
                                 <option value="01">ESSALUD</option>
                                 <option value="03">EPS</option>
@@ -384,7 +384,7 @@
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" [(ngModel)]="selectedSeguro" id="opConvive"
-                                formControlName="opConvive" style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;">
+                                formControlName="opConvive" style="height: 30px;  width: 150px; font-size: 12px; font-weight: 700;">
                                 <option value="01">PADRE</option>
                                 <option value="02">MADRE</option>
                                 <option value="03">AMBOS</option>
@@ -405,7 +405,7 @@
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" id="opPCargo" [(ngModel)]="selectedApoderado"
-                                formControlName="opPCargo" style="height: 30px;  width: 150px; font-weight: 505; font-size: 12px; font-weight: 505;">
+                                formControlName="opPCargo" style="height: 30px;  width: 150px; font-weight: 700; font-size: 12px; font-weight: 700;">
                                 <option value="01">PADRE</option>
                                 <option value="02">MADRE</option>
                                 <option value="03">AMBOS</option>
@@ -428,7 +428,7 @@
                             <div class="row" style="margin-left: 1px;">
                                 <select class="form-select mt-1" id="opTieneHermano" [(ngModel)]="selectedHermanos"
                                     (change)="onSelectionChange($event)" formControlName="opTieneHermano"
-                                    style="height: 30px;   width: 100px; font-size: 12px; font-weight: 505;">
+                                    style="height: 30px;   width: 100px; font-size: 12px; font-weight: 700;">
                                     <option value="" disabled selected>Seleccionar</option>
                                     <option [value]="true">SI</option>
                                     <option [value]="false">NO</option>
@@ -440,7 +440,7 @@
                                 <label *ngIf="operation" class="col-form-label mt-1"
                                     style="height: 30px;  margin-left: 8px; font-size: 12px;">Cuantos:</label>
                                 <input *ngIf="operation" maxlength="2" formControlName="nCantHermanos" type="number" (input)="onInputChange($event)"
-                                    style="height: 30px;  width: 90px; color: black; font-weight: 505; margin-left: 5px;"
+                                    style="height: 30px;  width: 90px; color: black; font-weight: 700; margin-left: 5px;"
                                     class="form-control mt-1">
 
                             </div>
@@ -462,7 +462,7 @@
                         </div>
                         <div class="col-sm-8">
                             <select id="option5" class="form-select"
-                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 505;" [(ngModel)]="selectedTipoDocRepre"  formControlName="option5">
+                                style="height: 30px;  width: 150px; font-size: 12px; font-weight: 700;" [(ngModel)]="selectedTipoDocRepre"  formControlName="option5">
                                 <option value="" disabled selected>Seleccionar</option>
                                 <option *ngFor="let option1 of listaTipoDoc" [value]="option1.tCodigo">{{
                                     option1.tDetallado}}
@@ -482,7 +482,7 @@
                             <div class="col-sm-8">
                                 <input formControlName="tNroDocumentoRepre" type="text" class="form-control mt-2"
                                     [readonly]="isReadonly" maxlength="15"
-                                    style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                    style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                     placeholder="Ingrese Doc. del Representante Legal"
                                     oninput="this.value = this.value.toUpperCase()">
                                 <span style="font-size: 11px;"
@@ -499,7 +499,7 @@
                         </div>
                         <div class="col-sm-8">
                             <input formControlName="tAPaternoRepre" maxlength="30" type="text" maxlength="30"
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 class="form-control mt-1" placeholder="Ingrese Paterno"
                                 oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
@@ -515,7 +515,7 @@
                         </div>
                         <div class="col-sm-8">
                             <input formControlName="tAMaternoRepre" maxlength="30" type="text"
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 class="form-control mt-1" placeholder="Ingrese Apellido Paterno"
                                 oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
@@ -531,7 +531,7 @@
                         </div>
                         <div class="col-sm-8">
                             <input formControlName="tNombresRepre" maxlength="30" type="text"
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 class="form-control mt-1" placeholder="Ingrese Nombre"
                                 oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
@@ -549,7 +549,7 @@
                         <div class="col-sm-8">
                             <input #myInputname type="text" id="tDireccionRepre" formControlName="tDireccionRepre" maxlength="190"
                                 class="form-control mt-2" maxlength="200"
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 placeholder="Ingrese Direccion" oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
                                 *ngIf="form.get('tDireccionRepre')?.hasError('required') && form.get('tDireccionRepre')?.touched">
@@ -564,7 +564,7 @@
                         </div>
                         <div class="col-sm-8">
                             <input formControlName="tTelefonoRepre" type="text" maxlength="30" class="form-control mt-2"
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 placeholder="Ingrese Telefono" oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
                                 *ngIf="form.get('tTelefonoRepre')?.hasError('required') && form.get('tTelefonoRepre')?.touched">
@@ -578,7 +578,7 @@
                         </div>
                         <div class="col-sm-8">
                             <input formControlName="tEmailRepre"  maxlength="40" type="email" class="form-control mt-2"
-                                style="height: 30px;  color: black; font-weight: 505; font-size: 12px;"
+                                style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 placeholder="Ingrese Correo Electronico"
                                 oninput="this.value = this.value.toUpperCase()">
                             <span style="font-size: 11px;"
@@ -593,7 +593,7 @@
                         </div>
                         <div class="col-sm-8">
                             <select class="form-select" id="opParentescoRepre" [(ngModel)]="selectedParentesco"
-                                formControlName="opParentescoRepre" style="height: 30px; font-weight: 505; width: 150px; font-size: 12px; font-weight: 505;">
+                                formControlName="opParentescoRepre" style="height: 30px; font-weight: 700; width: 150px; font-size: 12px; font-weight: 700;">
                                 <option value="01">PADRE</option>
                                 <option value="02">MADRE</option>
                            <!--     <option value="03">AMBOS</option>
