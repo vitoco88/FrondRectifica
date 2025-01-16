@@ -453,9 +453,29 @@
                         <h5 style="margin-top: 5px; margin-bottom: 5px;">  DATOS REPRESENTANTE LEGAL - (Responsable de Matricula)</h5>                                             
                     </div>
 
+                    <div class="form-group row mb-2"
+                    style="display: flex; justify-content: center; align-items: center;">
+                        <div class="row mt-2 text-center" style="background-color: transparent; padding: 10px;">
+                            <div class="col-lg-2">
+                            </div>
+                            <div class="col-lg-4">
+                                <button  (click)="PasarDatosPadre()" type="button" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 10px;">Padre</button>
+                            </div>
+                            <div class="col-lg-4">
+                                <button  (click)="PasarDatosMadre()" type="button"  class="btn btn-primary" style="margin-top: 10px; margin-bottom: 10px;">Madre</button>
+                            </div>
+                            <div class="col-lg-2">
+                            </div>
+                            
+                        </div>
+                    </div>
 
 
-                    <div class="form-group row" style="margin: 5px;">
+
+
+
+
+                    <div class="form-group row" style="margin: 5px; ">
                         <div class="col-sm-4 Text-end" style="text-align: end;">
                             <label class="col-form-label mt-2" style="height: 30px; font-size: 12px; ">Tipo
                                 Documento</label>
@@ -530,6 +550,7 @@
                                 style="height: 30px; ">Nombres</label>
                         </div>
                         <div class="col-sm-8">
+                            
                             <input formControlName="tNombresRepre" maxlength="30" type="text"
                                 style="height: 30px;  color: black; font-weight: 700; font-size: 12px;"
                                 class="form-control mt-1" placeholder="Ingrese Nombre"
@@ -594,6 +615,7 @@
                         <div class="col-sm-8">
                             <select class="form-select" id="opParentescoRepre" [(ngModel)]="selectedParentesco"
                                 formControlName="opParentescoRepre" style="height: 30px; font-weight: 700; width: 150px; font-size: 12px; font-weight: 700;">
+                                <option value="" disabled selected>Seleccionar</option>                                 
                                 <option value="01">PADRE</option>
                                 <option value="02">MADRE</option>
                            <!--     <option value="03">AMBOS</option>
@@ -610,16 +632,12 @@
                             </span>
                         </div>
                     </div>
-
-
-
-                    <div class="row mt-2 text-center">
-                        <div class="col-lg-6">
-                            <button type="submit" [disabled]="form.invalid" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 10px;">Aceptar</button>
+                    <div class="row mt-2 text-center"  >
+                        <div class="col-lg-6" style="margin-top: 15px;">
+                            <button type="submit" [disabled]="form.invalid" class="btn btn-primary" style="margin-bottom: 15px;">Aceptar</button>
                         </div>
-                        <div class="col-lg-6">
-                            <button routerLink="/" routerLinkActive="router-link-active"
-                                routerLinkActive="router-link-active" type="button"
+                        <div class="col-lg-6" style="margin-top: 15px;">
+                            <button routerLink="/" routerLinkActive="router-link-active"    routerLinkActive="router-link-active" type="button"
                                 class="btn btn-secondary">Volver</button>
                         </div>
                     </div>

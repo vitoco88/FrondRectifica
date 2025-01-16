@@ -10,6 +10,9 @@ export interface Apoderado{
     lActivo?: boolean;
     tDireccion?: string;
     fNacimiento?: Date;
+    tAPaterno?: string;
+    tAMaterno?: string;
+    tNombres?: string;
 
 
 }

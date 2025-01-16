@@ -189,9 +189,9 @@ export class MatriculaEstudiantesComponent implements OnInit, AfterViewInit {
   onInputChange(event: any): void {
 
     let currentValue = event.target.value;
-    if (/^[a-zA-Z0-9]/.test(currentValue)) {
+    if (/^[a-zA-ZÑñ ]/.test(currentValue)) {
       // Reemplaza caracteres no permitidos, pero permite letras, números y espacios
-      event.target.value = currentValue.replace(/[^a-zA-Z ]/g, '');
+      event.target.value = currentValue.replace(/[^a-zA-ZÑñ ]/g, '');
     } else {
       // Si el primer carácter no es válido, puedes limpiar el valor o manejarlo de otra manera
       event.target.value = '';

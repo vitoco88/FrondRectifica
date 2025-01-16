@@ -14,23 +14,28 @@ import { Apoderado } from '../interfaces/apoderado';
 export class EstudianteService {
 
 
-  private apiUrl = 'http://161.132.68.10:3001/api/estudiantes/';
+  private apiUrl = 'http://localhost:3000/api/estudiantes/';
 
-  private apiUrlgetByNro = 'http://161.132.68.10:3001/api/estudiantes/id/';
+  private apiUrlgetByNro = 'http://localhost:3000/api/estudiantes/id/';
 
-  private apiUrlValNro = 'http://161.132.68.10:3001/api/estudiantes/val/';
-  private apiReg = 'http://161.132.68.10:3001/api/estudiantes/reg/reg/';
+  private apiUrlValNro = 'http://localhost:3000/api/estudiantes/val/';
+  private apiReg = 'http://localhost:3000/api/estudiantes/reg/reg/';
   // 
   // Ruta del backend
-  private apiUrldlt = 'http://161.132.68.10:3001/api/estudiantes/cod/distritos';
+  private apiUrldlt = 'http://localhost:3000/api/estudiantes/cod/distritos';
 
-  private apiUrlupdt = 'http://161.132.68.10:3001/api/estudiantes/cod/';
+  private apiUrlupdt = 'http://localhost:3000/api/estudiantes/cod/';
 
-  private apiNivel = 'http://161.132.68.10:3001/api/estudiantes/cod/nivel';
+  private apiNivel = 'http://localhost:3000/api/estudiantes/cod/nivel';
 
-  private apiTipoDoc = 'http://161.132.68.10:3001/api/estudiantes/cod/tipodocumento';
+  private apiTipoDoc = 'http://localhost:3000/api/estudiantes/cod/tipodocumento';
 
-  private apiGrado = 'http://161.132.68.10:3001/api/estudiantes/cod/GRADO';
+  private apiGrado = 'http://localhost:3000/api/estudiantes/cod/GRADO';
+
+
+  private apiPadre = 'http://localhost:3000/api/estudiantes/padre/';
+
+  private apiMadre = 'http://localhost:3000/api/estudiantes/madre/';
 
 
   constructor(private http: HttpClient) { }
@@ -68,6 +73,17 @@ export class EstudianteService {
   getEstudiante(id: string): Observable<Estudiante> {
     return this.http.get<Estudiante>(this.apiUrlupdt + id);
   }
+
+  getPadre(id: string): Observable<Apoderado> {
+    return this.http.get<Apoderado>(this.apiPadre + id);
+  }
+
+
+  getMadre(id: string): Observable<Apoderado> {
+    return this.http.get<Apoderado>(this.apiMadre + id);
+  }
+
+
   UpdateEstudiante(tCodEstudiante: string, estudiante: Estudiante): Observable<void> {
     return this.http.put<void>(this.apiUrlupdt + tCodEstudiante, estudiante)
   }

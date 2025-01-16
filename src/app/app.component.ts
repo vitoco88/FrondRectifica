@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { ListEstudiantesComponent } from './components/list-estudiantes/list-estudiantes.component';
 import { FormsModule } from '@angular/forms';
+import { AddEditApoderadosComponent } from "./components/add-edit-apoderados/add-edit-apoderados.component";
 
 @Component({
   selector: 'app-root',
