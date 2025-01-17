@@ -417,14 +417,23 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
   selectedHermanos?: boolean;
   selectedTipoDocRepre?: string;
 
-  onInputChange(event: any): void {
-    /*
-    const currentValue = event.target.value;
-    // Si la entrada no cumple con la expresión regular, la corregimos
-    if (!this.regex.test(currentValue)) {
-      event.target.value = currentValue.replace(/[^a-zA-Z0-9]/g, ''); // Elimina caracteres no permitidos
+
+
+    // Evento de cambio en el campo de texto
+    onInputChange(event: any): void {
+
+      let currentValue = event.target.value;
+      if (/^[a-zA-ZÑñ ]/.test(currentValue)) {
+        // Reemplaza caracteres no permitidos, pero permite letras, números y espacios
+        event.target.value = currentValue.replace(/[^a-zA-ZÑñ ]/g, '');
+      } else {
+        // Si el primer carácter no es válido, puedes limpiar el valor o manejarlo de otra manera
+        event.target.value = '';
+      }
     }
-    */
+  /*
+  
+  onInputChange(event: any): void {
     let currentValue = event.target.value;
     if (/^[a-zA-Z0-9]/.test(currentValue)) {
       // Reemplaza caracteres no permitidos, pero permite letras, números y espacios
@@ -434,7 +443,7 @@ export class AddEditEstudianteComponent implements OnInit, AfterViewInit {
       event.target.value = '';
     }
   }
-
+  */
 
   getEstudiante(id: string) {
     this._estudianteService.getEstudiante(id).subscribe((data: Estudiante) => {

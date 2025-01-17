@@ -14,28 +14,28 @@ import { Apoderado } from '../interfaces/apoderado';
 export class EstudianteService {
 
 
-  private apiUrl = 'http://localhost:3000/api/estudiantes/';
+  private apiUrl = 'http://161.132.68.10:3001/api/estudiantes/';
 
-  private apiUrlgetByNro = 'http://localhost:3000/api/estudiantes/id/';
+  private apiUrlgetByNro = 'http://161.132.68.10:3001/api/estudiantes/id/';
 
-  private apiUrlValNro = 'http://localhost:3000/api/estudiantes/val/';
-  private apiReg = 'http://localhost:3000/api/estudiantes/reg/reg/';
+  private apiUrlValNro = 'http://161.132.68.10:3001/api/estudiantes/val/';
+  private apiReg = 'http://161.132.68.10:3001/api/estudiantes/reg/reg/';
   // 
   // Ruta del backend
-  private apiUrldlt = 'http://localhost:3000/api/estudiantes/cod/distritos';
+  private apiUrldlt = 'http://161.132.68.10:3001/api/estudiantes/cod/distritos';
 
-  private apiUrlupdt = 'http://localhost:3000/api/estudiantes/cod/';
+  private apiUrlupdt = 'http://161.132.68.10:3001/api/estudiantes/cod/';
 
-  private apiNivel = 'http://localhost:3000/api/estudiantes/cod/nivel';
+  private apiNivel = 'http://161.132.68.10:3001/api/estudiantes/cod/nivel';
 
-  private apiTipoDoc = 'http://localhost:3000/api/estudiantes/cod/tipodocumento';
+  private apiTipoDoc = 'http://161.132.68.10:3001/api/estudiantes/cod/tipodocumento';
 
-  private apiGrado = 'http://localhost:3000/api/estudiantes/cod/GRADO';
+  private apiGrado = 'http://161.132.68.10:3001/api/estudiantes/cod/GRADO';
 
 
-  private apiPadre = 'http://localhost:3000/api/estudiantes/padre/';
+  private apiPadre = 'http://161.132.68.10:3001/api/estudiantes/padre/';
 
-  private apiMadre = 'http://localhost:3000/api/estudiantes/madre/';
+  private apiMadre = 'http://161.132.68.10:3001/api/estudiantes/madre/';
 
 
   constructor(private http: HttpClient) { }
